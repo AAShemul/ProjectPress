@@ -1,0 +1,64 @@
+{
+  "name": "stechbd/cookiecons",
+  "description": "A WordPress plugin to show cookie consent.",
+  "type": "wordpress-plugin",
+  "license": "GPLv3",
+  "keywords": [
+	"wordpress",
+	"wordpress-plugin",
+	"php",
+	"cookiecons",
+	"stechbd",
+	"aashemul"
+  ],
+  "homepage": "https://www.stechbd.net/project/CookieCons/",
+  "support": {
+	"issues": "https://github.com/STechBD/CookieCons/issues",
+	"source": "https://github.com/STechBD/CookieCons",
+	"email": "product@stechbd.net",
+	"chat": "https://www.facebook.com/STechBD.Net/",
+	"docs": "https://docs.stechbd.net/CookieCons/",
+	"tickets": "https://clients.stechbd.net"
+  },
+  "autoload": {
+	"psr-4": {
+	  "STechBD\\CookieCons\\": "src/"
+	}
+  },
+  "authors": [
+	{
+	  "name": "S Technologies",
+	  "email": "product@stechbd.net",
+	  "homepage": "https://www.stechbd.net",
+	  "role": "Developer"
+	},
+	{
+	  "name": "Md. Ashraful Alam Shemul",
+	  "email": "aashemul@gmail.com",
+	  "homepage": "https://www.aashemul.com",
+	  "role": "Author"
+	}
+  ],
+  "minimum-stability": "stable",
+  "require": {
+	"php": ">=7.4"
+  },
+  "extra": {
+	"wordpress-plugin": {
+	  "name": "CookieCons",
+	  "version": "1.0.0",
+	  "textdomain": "stechbd-cookiecons",
+	  "domain-path": "languages",
+	  "main-file": "stechbd-cookiecons.php",
+	  "requires": {
+		"wordpress": ">=5.0"
+	  },
+	  "tested": "6.2.2",
+	  "author": "S Technologies Limited",
+	  "author-uri": "https://www.stechbd.net",
+	  "description": "CookieCons is a simple and lightweight cookie consent plugin for WordPress.",
+	  "license": "GPLv3",
+	  "license-uri": "https://www.gnu.org/licenses/gpl-3.0.html"
+	}
+  }
+}
