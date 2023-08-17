@@ -2,14 +2,14 @@
 
 
 /**
- * Project: CookieCons
- * Description: CookieCons is a simple and lightweight cookie consent plugin for WordPress.
+ * Project: ProjectPress
+ * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/CookieCons/
+ * Website: https://www.stechbd.net/project/ProjectPress/
  * Developer: S Technologies Limited
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
@@ -18,7 +18,7 @@
  */
 
 
-namespace STechBD\CookieCons;
+namespace STechBD\ProjectPress;
 
 /**
  * Exit if accessed directly.
@@ -27,7 +27,7 @@ namespace STechBD\CookieCons;
  */
 if(!defined('ABSPATH'))
 {
-	die('<title>Access Denied | CookieCons by STechBD.Net</title><h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
 }
 
 /**
@@ -47,8 +47,8 @@ class Main
      */
     private function __construct()
     {
-        register_activation_hook(ST_COOKIECONS_FILE, [$this, 'activate']);
-		register_deactivation_hook(ST_COOKIECONS_FILE, [$this, 'deactivate']);
+        register_activation_hook(ST_PROJECTPRESS_FILE, [$this, 'activate']);
+		register_deactivation_hook(ST_PROJECTPRESS_FILE, [$this, 'deactivate']);
         add_action('plugins_loaded', [$this, 'init_plugin']);
     }
 
@@ -78,21 +78,21 @@ class Main
      */
     public function activate(): void
     {
-        $installed = get_option('stechbd_cookiecons_installed');
-		$notice = get_option('stechbd_cookiecons_notice');
-		$noticeValue = 'This website uses cookies to improve your experience. <strong><a href="' . ST_COOKIECONS_SITE . 'privacy-policy/">Learn More</a></strong>';
+        $installed = get_option('stechbd_projectpress_installed');
+		$notice = get_option('stechbd_projectpress_notice');
+		$noticeValue = 'This website uses cookies to improve your experience. <strong><a href="' . ST_PROJECTPRESS_SITE . 'privacy-policy/">Learn More</a></strong>';
 
         if(!$installed)
         {
-            update_option('stechbd_cookiecons_installed', time());
+            update_option('stechbd_projectpress_installed', time());
         }
 
-        update_option('stechbd_cookiecons_version', ST_COOKIECONS_VERSION);
-        update_option('stechbd_cookiecons_version_code', ST_COOKIECONS_VERSION_CODE);
+        update_option('stechbd_projectpress_version', ST_PROJECTPRESS_VERSION);
+        update_option('stechbd_projectpress_version_code', ST_PROJECTPRESS_VERSION_CODE);
 
 		if(!$notice)
 		{
-			add_option('stechbd_cookiecons_notice', $noticeValue);
+			add_option('stechbd_projectpress_notice', $noticeValue);
 		}
     }
 

@@ -1,5 +1,6 @@
 {
-  "name": "stechbd/cookiecons",
+  "name": "stechbd/projectpress",
+  "version": "1.0.0",
   "description": "A WordPress plugin to show cookie consent.",
   "type": "wordpress-plugin",
   "license": "GPLv3",
@@ -20,9 +21,12 @@
 	"docs": "https://docs.stechbd.net/CookieCons/",
 	"tickets": "https://clients.stechbd.net"
   },
+  "config": {
+	"vendor-dir": "src/inc/vendor"
+  },
   "autoload": {
 	"psr-4": {
-	  "STechBD\\CookieCons\\": "src/"
+	  "STechBD\\ProjectPress\\": "src/inc/"
 	}
   },
   "authors": [

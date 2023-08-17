@@ -2,14 +2,14 @@
 
 
 /**
- * Project: CookieCons
- * Description: CookieCons is a simple and lightweight cookie consent plugin for WordPress.
+ * Project: ProjectPress
+ * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/CookieCons/
+ * Website: https://www.stechbd.net/project/ProjectPress/
  * Developer: S Technologies Limited
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
@@ -18,7 +18,7 @@
  */
 
 
-namespace STechBD\CookieCons\Admin;
+namespace STechBD\ProjectPress\Admin;
 
 /**
  * Exit if accessed directly.
@@ -27,7 +27,7 @@ namespace STechBD\CookieCons\Admin;
  */
 if(!defined('ABSPATH'))
 {
-	die('<title>Access Denied | CookieCons by STechBD.Net</title><h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
 }
 
 /**

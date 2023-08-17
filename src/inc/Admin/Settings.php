@@ -2,14 +2,14 @@
 
 
 /**
- * Project: CookieCons
- * Description: CookieCons is a simple and lightweight cookie consent plugin for WordPress.
+ * Project: ProjectPress
+ * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/CookieCons/
+ * Website: https://www.stechbd.net/project/ProjectPress/
  * Developer: S Technologies Limited
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
@@ -18,7 +18,7 @@
  */
 
 
-namespace STechBD\CookieCons\Admin;
+namespace STechBD\ProjectPress\Admin;
 
 /**
  * Exit if accessed directly.
@@ -27,7 +27,7 @@ namespace STechBD\CookieCons\Admin;
  */
 if(!defined('ABSPATH'))
 {
-	die('<title>Access Denied | CookieCons by STechBD.Net</title><h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
 }
 
 /**
@@ -45,7 +45,7 @@ class Settings
 	 */
 	public function settings_page(): void
 	{
-		require_once ST_COOKIECONS_ADMIN . 'View/Settings.php';
+		require_once ST_PROJECTPRESS_ADMIN . 'View/Settings.php';
 	}
 
 	/**
@@ -58,34 +58,34 @@ class Settings
 	{
 		if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submitNotice']))
 		{
-			if(!wp_verify_nonce($_POST['_wpnonce'], 'stechbd-cookiecons'))
+			if(!wp_verify_nonce($_POST['_wpnonce'], 'stechbd-projectpress'))
 			{
-				wp_die('<h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>', 'CookieCons Error');
+				wp_die('<h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>', 'ProjectPress Error');
 			}
 
 			if(!current_user_can('manage_options'))
 			{
-				wp_die('<h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>', 'CookieCons Error');
+				wp_die('<h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>', 'ProjectPress Error');
 			}
 
-			$notice = get_option('stechbd_cookiecons_notice');
+			$notice = get_option('stechbd_projectpress_notice');
 			$noticeVal = wp_unslash($_POST['notice']);
 
 			if(!empty($noticeVal))
 			{
 				if($notice === $noticeVal)
 				{
-					add_settings_error('stechbd-cookiecons', 'error', 'Same notice already exists!');
+					add_settings_error('stechbd-projectpress', 'error', 'Same notice already exists!');
 				}
 				else
 				{
-					update_option('stechbd_cookiecons_notice', $noticeVal);
-					add_settings_error('stechbd-cookiecons', 'success', 'Notice updated successfully!', 'updated');
+					update_option('stechbd_projectpress_notice', $noticeVal);
+					add_settings_error('stechbd-projectpress', 'success', 'Notice updated successfully!', 'updated');
 				}
 			}
 			else
 			{
-				add_settings_error('stechbd-cookiecons', 'error', 'Please insert a value!');
+				add_settings_error('stechbd-projectpress', 'error', 'Please insert a value!');
 			}
 		}
 	}

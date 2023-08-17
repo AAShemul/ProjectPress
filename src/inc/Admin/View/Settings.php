@@ -2,14 +2,14 @@
 
 
 /**
- * Project: CookieCons
- * Description: CookieCons is a simple and lightweight cookie consent plugin for WordPress.
+ * Project: ProjectPress
+ * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/CookieCons/
+ * Website: https://www.stechbd.net/project/ProjectPress/
  * Developer: S Technologies Limited
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
@@ -25,7 +25,7 @@
  */
 if(!defined('ABSPATH'))
 {
-	die('<title>Access Denied | CookieCons by STechBD.Net</title><h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
 }
 
 /**
@@ -37,27 +37,27 @@ if(!defined('ABSPATH'))
 
 ?>
 <div class="wrap">
-	<h1 class="wp-heading-inline"><?php _e('Settings - CookieCons', 'stechbd-cookiecons') ?></h1>
+	<h1 class="wp-heading-inline"><?php _e('Settings - ProjectPress', 'stechbd-projectpress') ?></h1>
 	<hr class="wp-header-end">
-	<?php settings_errors('stechbd-cookiecons') ?>
+	<?php settings_errors('stechbd-projectpress') ?>
 	<div id="ajax-response"></div>
-	<p><?php _e('Put your custom notice for cookie policy.', 'stechbd-cookiecons') ?></p>
+	<p><?php _e('Put your custom notice for cookie policy.', 'stechbd-projectpress') ?></p>
 	<form method="post" name="notice" id="notice" class="validate">
 		<table class="form-table" role="presentation">
 			<tbody>
 			<tr class="form-field form-required">
 				<th scope="row">
-					<?php _e('Custom Notice', 'stechbd-cookiecons') ?> <span class="description">(<?php _e('optional', 'stechbd-cookiecons') ?>)</span>
+					<?php _e('Custom Notice', 'stechbd-projectpress') ?> <span class="description">(<?php _e('optional', 'stechbd-projectpress') ?>)</span>
 				</th>
 				<td>
 					<label>
-						<textarea placeholder="This website uses cookies to improve your experience. &lt;strong&gt;&lt;a href=&quot;<?= ST_COOKIECONS_SITE ?>privacy-policy/&quot;&gt;Learn More&lt;/a&gt;&lt;/strong&gt;" rows="4" cols="70" id="notice" name="notice"><?= get_option('stechbd_cookiecons_notice') ?></textarea>
+						<textarea placeholder="This website uses cookies to improve your experience. &lt;strong&gt;&lt;a href=&quot;<?= ST_PROJECTPRESS_SITE ?>privacy-policy/&quot;&gt;Learn More&lt;/a&gt;&lt;/strong&gt;" rows="4" cols="70" id="notice" name="notice"><?= get_option('stechbd_projectpress_notice') ?></textarea>
 					</label>
 				</td>
 			</tr>
 			</tbody>
 		</table>
-		<?php wp_nonce_field('stechbd-cookiecons') ?>
-		<?php submit_button(__('Save', 'stechbd-cookiecons'), 'button-primary', 'submitNotice') ?>
+		<?php wp_nonce_field('stechbd-projectpress') ?>
+		<?php submit_button(__('Save', 'stechbd-projectpress'), 'button-primary', 'submitNotice') ?>
 	</form>
 </div>

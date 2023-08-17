@@ -2,14 +2,14 @@
 
 
 /**
- * Project: CookieCons
- * Description: CookieCons is a simple and lightweight cookie consent plugin for WordPress.
+ * Project: ProjectPress
+ * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/CookieCons/
+ * Website: https://www.stechbd.net/project/ProjectPress/
  * Developer: S Technologies Limited
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
@@ -18,7 +18,7 @@
  */
 
 
-namespace STechBD\CookieCons;
+namespace STechBD\ProjectPress;
 
 /**
  * Exit if accessed directly.
@@ -27,7 +27,7 @@ namespace STechBD\CookieCons;
  */
 if(!defined('ABSPATH'))
 {
-	die('<title>Access Denied | CookieCons by STechBD.Net</title><h1>CookieCons by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
 }
 
 /**
@@ -58,11 +58,11 @@ class Asset
     {
         return 
         [
-            'st-cookiecons-style'    =>    
+            'st-projectpress-style'    =>    
             [
-                'src'        =>    ST_COOKIECONS_SITE_CSS . 'stechbd-cookiecons.css',
+                'src'        =>    ST_PROJECTPRESS_SITE_CSS . 'stechbd-projectpress.css',
                 'dependency'    =>    false,
-                'version'        =>    filemtime(ST_COOKIECONS_CSS . 'stechbd-cookiecons.css')
+                'version'        =>    filemtime(ST_PROJECTPRESS_CSS . 'stechbd-projectpress.css')
             ]
         ];
     }
@@ -77,11 +77,11 @@ class Asset
     {
         return 
         [
-            'st-cookiecons-script'    =>    
+            'st-projectpress-script'    =>    
             [
-                'src'        =>    ST_COOKIECONS_SITE_JS . 'stechbd-cookiecons.js',
+                'src'        =>    ST_PROJECTPRESS_SITE_JS . 'stechbd-projectpress.js',
                 'dependency'    =>    'jquery',
-                'version'        =>    filemtime(ST_COOKIECONS_JS . 'stechbd-cookiecons.js')
+                'version'        =>    filemtime(ST_PROJECTPRESS_JS . 'stechbd-projectpress.js')
             ]
         ];
     }
