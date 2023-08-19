@@ -10,8 +10,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 22, 2023
- * Updated: July 5, 2023
+ * Created: August 17, 2023
+ * Updated: August 19, 2023
  */
 
 
@@ -32,61 +32,51 @@
 	 * @since 1.0.0
 	 */
 	$(document).ready(function () {
-		const cookieValue = getCookie('stechbd-projectpress');
+		console.log('ProjectPress is ready.');
 
-		if (cookieValue === 'accepted') {
-			$('.stechbd-projectpress').hide();
-		}
+		$('body').append('' +
+			'<div class="stechbd-projectpress-modal">' +
+				'<div class="content">' +
+					'<span class="close">&times;</span>' +
+					'<div class="details">Loading</div>' +
+				'</div>' +
+			'</div>');
+
+		let projectDetails = $('.stechbd-projectpress-modal .details');
+		let html = '' +
+			'<div class="thumbnail"><img src="http://aashemul/STechBD/WP-Plugin/wp-content/uploads/2023/08/Thumbnail.png" alt="A" width="100%"></div>' +
+			'<div class="title">Name</div>' +
+			'<div class="description">Body text</div>';
+		projectDetails.html(html);
 
 		/**
-		 * Function to accept cookies.
+		 * Function to load the modal.
 		 *
+		 * @param {int} id
 		 * @returns {void}
 		 * @since 1.0.0
 		 */
-		$('.stechbd-projectpress .close').click(function () {
-			setCookie('stechbd-projectpress', 'accepted');
-			$('.stechbd-projectpress').fadeOut();
+		$('.stechbd-projectpress-modal').on('click', function () {
+			console.log('ProjectPress modal is ready.');
+
+			let id = $(this).data('id');
+			$('.stechbd-projectpress-modal').fadeIn();
 		});
+
+		function loadProjectDetails(projectId) {
+			$.ajax({
+				type: "POST",
+				url: "URL_TO_AJAX_ENDPOINT",
+				data: {action: "load_project_details", project_id: projectId},
+				success: function (data) {
+					projectDetails.html(data);
+				},
+				error: function (error) {
+					console.error("Error loading project details:", error);
+				}
+			});
+		}
 	});
 
-	/**
-	 * Function to set a cookie.
-	 *
-	 * @param {string} name
-	 * @param {string} value
-	 * @returns {void}
-	 * @since 1.0.0
-	 */
-	function setCookie(name, value) {
-		const date = new Date();
-		date.setTime(date.getTime() + (10 * 365 * 24 * 60 * 60 * 1000)); // Set expiration date to 10 years in the future
-		const expires = 'expires=' + date.toUTCString();
-		document.cookie = name + '=' + value + ';' + expires + ';path=/';
-	}
-
-	/**
-	 * Function to retrieve the value of a cookie.
-	 *
-	 * @param {string} name
-	 * @returns {string}
-	 * @since 1.0.0
-	 */
-	function getCookie(name) {
-		const cookieName = name + '=';
-		const cookieArray = document.cookie.split(';');
-
-		for (let i = 0; i < cookieArray.length; i++) {
-			let cookie = cookieArray[i];
-
-			while (cookie.charAt(0) === ' ') {
-				cookie = cookie.substring(1);
-			}
-
-			if (cookie.indexOf(cookieName) === 0) {
-				return cookie.substring(cookieName.length, cookie.length);
-			}
-		}
-	}
 
 })(jQuery);

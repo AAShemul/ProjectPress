@@ -10,40 +10,96 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 20, 2023
- * Updated: July 5, 2023
+ * Created: August 17, 2023
+ * Updated: August 19, 2023
  */
 
 
-.stechbd-projectpress {
-	color: #FFFFFF;
-	background: #2C3E50;
-	padding: 5px 20px;
-	display: flex;
+.stechbd-projectpress-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 20px;
-	align-items: center;
+}
+
+.stechbd-projectpress-grid .item {
+	border: 1px solid #ddd;
+	padding: 20px;
+	text-align: center;
+	background-color: #f9f9f9;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stechbd-projectpress-grid .item:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+.stechbd-projectpress-grid .item img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+	.stechbd-projectpress-grid {
+		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	}
+}
+
+.stechbd-projectpress-modal {
+	display: none;
 	position: fixed;
+	z-index: 999;
+	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	overflow-y: auto;
 }
 
-.stechbd-projectpress > .notice {
-	text-align: center;
-	padding: 5px;
-	flex-grow: 1;
-}
-
-.stechbd-projectpress > .notice a:link {
-	color: #497CC9;
-}
-
-.stechbd-projectpress > .close {
-	color: #FFFFFF;
-	background: #497CC9;
-	padding: 5px 15px;
+.stechbd-projectpress-modal .content {
+	position: relative;
+	background-color: #fff;
+	margin: 15% auto;
+	padding: 20px;
+	width: 70%;
 	border-radius: 5px;
-	text-align: center;
-	font-size: small;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.stechbd-projectpress-modal .content .close {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	font-size: 20px;
+	font-weight: bold;
 	cursor: pointer;
+}
+
+.stechbd-projectpress-modal .content .details {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	grid-template-rows: 1fr 2fr;
+	gap: 30px;
+	grid-auto-flow: row;
+	grid-template-areas:
+    "thumbnail title"
+    "description description";
+}
+
+.stechbd-projectpress-modal .content .details .thumbnail {
+	grid-area: thumbnail;
+}
+
+.stechbd-projectpress-modal .content .details .title {
+	grid-area: title;
+	font-size: xx-large;
+}
+
+.stechbd-projectpress-modal .content .details .description {
+	grid-area: description;
+	font-size: medium;
 }

@@ -20,6 +20,8 @@
 
 namespace STechBD\ProjectPress\Frontend;
 
+use WP_Query;
+
 /**
  * Exit if accessed directly.
  *
@@ -50,13 +52,50 @@ class Shortcode
 	/**
 	 * Method to load the shortcode view file.
 	 *
-	 * @param mixed|null $attributes
-	 * @param mixed|null $content
 	 * @return string
 	 * @since 1.0.0
 	 */
-	public function render( mixed $attributes = null, mixed $content = null ): string
+	public function render(): string
 	{
-		return 'ProjectPress Shortcode';
+		$args = array(
+			'post_type'         => 'project',
+			'posts_per_page'    => -1,
+		);
+
+		$projects_query = new WP_Query( $args );
+
+		$content = '';
+
+		if ( $projects_query->have_posts() ) {
+			$content .= '<div class="stechbd-projectpress-grid">';
+			while ( $projects_query->have_posts() ) {
+				$projects_query->the_post();
+				$thumbnail_url = get_the_post_thumbnail_url();
+				$project_title = get_the_title();
+				$project_excerpt = get_the_excerpt();
+				$custom_field_value = get_post_meta( get_the_ID(), 'link', true );
+				$permalink = get_permalink();
+				$id = get_the_ID();
+
+				$content .= '<a href="#" onclick="event.preventDefault();" data-id="' . $id . ');">';
+				$content .= '<div class="item">';
+				$content .= '<img src="' . $thumbnail_url . '" alt="' . $project_title . '">';
+				$content .= '<h3>' . $project_title . '</h3>';
+				$content .= '<p>' . $project_excerpt . '</p>';
+				$content .= '<p>' . $custom_field_value . '</p>';
+				$content .= '</div>';
+				$content .= '</a>';
+			}
+			$content .= '</div>';
+		}
+
+		/*$content .= '<div class="stechbd-projectpress-modal">';
+		$content .= '<div class="content">';
+		$content .= '<span class="close">&times;</span>';
+		$content .= '<div class="details">Loading ...</div>';
+		$content .= '</div>';
+		$content .= '</div>';*/
+
+		return $content;
 	}
 }
