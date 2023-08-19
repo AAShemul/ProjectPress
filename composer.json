@@ -58,7 +58,7 @@
 		"wordpress": ">=5.0"
 	  },
 	  "tested": "6.2.2",
-	  "author": "S Technologies Limited",
+	  "author": "S Technologies",
 	  "author-uri": "https://www.stechbd.net",
 	  "description": "CookieCons is a simple and lightweight cookie consent plugin for WordPress.",
 	  "license": "GPLv3",

@@ -10,7 +10,7 @@
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
  * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies Limited
+ * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: June 21, 2023
@@ -23,9 +23,8 @@
  *
  * @since 1.0.0
  */
-if(!defined('ABSPATH'))
-{
-	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
 }
 
 
@@ -38,10 +37,10 @@ if(!defined('ABSPATH'))
 
 ?>
 <div class="stechbd-projectpress">
-    <div class="notice">
-        <?= get_option('stechbd_projectpress_notice') ?>
-    </div>
-    <div class="close">
-        Got it
-    </div>
+	<div class="notice">
+		<?= get_option( 'stechbd_projectpress_notice' ) ?>
+	</div>
+	<div class="close">
+		Got it
+	</div>
 </div>

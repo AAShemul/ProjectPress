@@ -8,12 +8,12 @@
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
- * Author: S Technologies Limited
+ * Author: S Technologies
  * Author URI: https://www.stechbd.net
  * Requires at least: 5.0.0
  * Tested up to: 6.2.2
  * Requires PHP: 8.0
- * Created: June 3, 2023
+ * Created: August 17, 2023
  * Updated: July 6, 2023
  * Text Domain: stechbd-projectpress
  * Domain Path: /languages
@@ -27,8 +27,8 @@
  *
  * @since 1.0.0
  */
-if (!defined('ABSPATH')) {
-	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -52,10 +52,8 @@ if (!defined('ABSPATH')) {
  *
  * @since 1.0.0
  */
-
-
-define('ST_PROJECTPRESS_PLUGIN', plugin_dir_path(__FILE__));
-define('ST_PROJECTPRESS_SITE', home_url() . '/');
+define( 'ST_PROJECTPRESS_PLUGIN', plugin_dir_path( __FILE__ ) );
+define( 'ST_PROJECTPRESS_SITE', home_url() . '/' );
 const ST_PROJECTPRESS_FILE = __FILE__;
 const ST_PROJECTPRESS_DS = DIRECTORY_SEPARATOR;
 const ST_PROJECTPRESS_INC = ST_PROJECTPRESS_PLUGIN . 'inc' . ST_PROJECTPRESS_DS;
@@ -68,12 +66,10 @@ const ST_PROJECTPRESS_IMG = ST_PROJECTPRESS_ASSET . 'img' . ST_PROJECTPRESS_DS;
 const ST_PROJECTPRESS_SITE_PLUGIN = ST_PROJECTPRESS_SITE . 'wp-content' . ST_PROJECTPRESS_DS . 'plugins' . ST_PROJECTPRESS_DS . 'stechbd-projectpress' . ST_PROJECTPRESS_DS;
 const ST_PROJECTPRESS_SITE_CSS = ST_PROJECTPRESS_SITE_PLUGIN . 'asset' . ST_PROJECTPRESS_DS . 'css' . ST_PROJECTPRESS_DS;
 const ST_PROJECTPRESS_SITE_JS = ST_PROJECTPRESS_SITE_PLUGIN . 'asset' . ST_PROJECTPRESS_DS . 'js' . ST_PROJECTPRESS_DS;
-
 const ST_PROJECTPRESS_VERSION = '1.0.0';
 const ST_PROJECTPRESS_VERSION_CODE = '1';
 
-require_once(ST_PROJECTPRESS_INC . 'vendor' . ST_PROJECTPRESS_DS . 'autoload.php');
-
+require_once( ST_PROJECTPRESS_INC . 'vendor' . ST_PROJECTPRESS_DS . 'autoload.php' );
 
 /**
  * Calling 'STechBD\ProjectPress\Main::init()' method to initialize the plugin.

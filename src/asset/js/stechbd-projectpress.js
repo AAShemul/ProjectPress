@@ -7,7 +7,7 @@
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
  * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies Limited
+ * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: June 22, 2023
@@ -22,16 +22,16 @@
  * @returns {void}
  * @since 1.0.0
  */
-;(function($) {
+;(function ($) {
 	'use strict';
-	
+
 	/**
 	 * Function to fire when the document is ready.
 	 *
 	 * @returns {void}
 	 * @since 1.0.0
 	 */
-	$(document).ready(function() {
+	$(document).ready(function () {
 		const cookieValue = getCookie('stechbd-projectpress');
 
 		if (cookieValue === 'accepted') {
@@ -44,7 +44,7 @@
 		 * @returns {void}
 		 * @since 1.0.0
 		 */
-		$('.stechbd-projectpress .close').click(function() {
+		$('.stechbd-projectpress .close').click(function () {
 			setCookie('stechbd-projectpress', 'accepted');
 			$('.stechbd-projectpress').fadeOut();
 		});

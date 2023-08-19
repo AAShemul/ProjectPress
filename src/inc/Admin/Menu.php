@@ -10,7 +10,7 @@
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
  * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies Limited
+ * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: June 8, 2023
@@ -25,9 +25,8 @@ namespace STechBD\ProjectPress\Admin;
  *
  * @since 1.0.0
  */
-if(!defined('ABSPATH'))
-{
-	die('<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access denied for security reasons.</p>');
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -45,8 +44,8 @@ class Menu
 	 */
 	public function __construct()
 	{
-		$this -> dispatch_actions();
-		add_action('admin_menu', [$this, 'add_admin_menu']);
+		$this->dispatch_actions();
+		add_action( 'admin_menu', [$this, 'add_admin_menu'] );
 	}
 
 	/**
@@ -58,7 +57,7 @@ class Menu
 	public function dispatch_actions(): void
 	{
 		$settings = new Settings();
-		add_action('admin_init', [$settings, 'form_handler']);
+		add_action( 'admin_init', [$settings, 'form_handler'] );
 	}
 
 	/**
@@ -69,7 +68,7 @@ class Menu
 	 */
 	public function add_admin_menu(): void
 	{
-		add_menu_page(__('ProjectPress Settings', 'stechbd-projectpress'), __('ProjectPress', 'stechbd-projectpress'), 'manage_options', 'stechbd-projectpress', [$this, 'admin_index'], 'dashicons-admin-generic');
+		add_menu_page( __( 'ProjectPress Settings', 'stechbd-projectpress' ), __( 'ProjectPress', 'stechbd-projectpress' ), 'manage_options', 'stechbd-projectpress', [$this, 'admin_index'], 'dashicons-admin-generic' );
 	}
 
 	/**
@@ -81,6 +80,6 @@ class Menu
 	public function admin_index(): void
 	{
 		$settings = new Settings();
-		$settings -> settings_page();
+		$settings->settings_page();
 	}
 }
