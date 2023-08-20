@@ -14,7 +14,7 @@
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: August 17, 2023
- * Updated: July 6, 2023
+ * Updated: August 20, 2023
  */
 
 
@@ -42,7 +42,7 @@ class Shortcode
 	/**
 	 * The class constructor method to put shortcode in the 'wp_head' hook.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function __construct()
@@ -103,13 +103,6 @@ class Shortcode
 			}
 			$content .= '</div>';
 		}
-
-		/*$content .= '<div class="stechbd-projectpress-modal">';
-		$content .= '<div class="content">';
-		$content .= '<span class="close">&times;</span>';
-		$content .= '<div class="details">Loading ...</div>';
-		$content .= '</div>';
-		$content .= '</div>';*/
 
 		return $content;
 	}

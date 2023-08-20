@@ -20,6 +20,8 @@
 
 namespace STechBD\ProjectPress\Admin;
 
+use STechBD\ProjectPress\Asset;
+
 /**
  * Exit if accessed directly.
  *
@@ -39,11 +41,27 @@ class Init
 	/**
 	 * The class constructor method to load the Menu class.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function __construct()
 	{
+		add_action( 'admin_enqueue_scripts', [$this, 'enqueue_scripts'] );
+		
 		new Menu();
+	}
+
+	/**
+	 * Method to load all the assets and enqueue the styles and scripts.
+	 *
+	 * @return void Returns nothing.
+	 * @since 1.0.0
+	 */
+	public function enqueue_scripts(): void
+	{
+		new Asset();
+		
+		wp_enqueue_script( 'jquery' );
+		wp_enqueue_script( 'st-projectpress-admin-script' );
 	}
 }

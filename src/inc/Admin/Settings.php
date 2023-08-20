@@ -39,7 +39,7 @@ class Settings
 	/**
 	 * Method to load the Settings page view.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function settings_page(): void
@@ -50,7 +50,7 @@ class Settings
 	/**
 	 * Method to handle the submission from admin Settings page.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function form_handler(): void

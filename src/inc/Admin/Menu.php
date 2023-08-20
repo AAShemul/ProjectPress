@@ -39,7 +39,7 @@ class Menu
 	/**
 	 * The class constructor method to dispatch actions and add an admin menu in the sidebar.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function __construct()
@@ -51,7 +51,7 @@ class Menu
 	/**
 	 * Method to dispatch actions and handle form.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function dispatch_actions(): void
@@ -63,7 +63,7 @@ class Menu
 	/**
 	 * Method to add admin settings page in the sidebar menu.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function add_admin_menu(): void
@@ -74,7 +74,7 @@ class Menu
 	/**
 	 * Method to load admin settings page.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function admin_index(): void

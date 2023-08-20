@@ -39,7 +39,7 @@ class Asset
 	/**
 	 * The class constructor method to call the register method.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function __construct()
@@ -50,7 +50,7 @@ class Asset
 	/**
 	 * Method to register all styles and scripts for future enqueuing.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function register(): void
@@ -102,7 +102,13 @@ class Asset
 						'src' => ST_PROJECTPRESS_SITE_JS . 'stechbd-projectpress.js',
 						'dependency' => 'jquery',
 						'version' => filemtime( ST_PROJECTPRESS_JS . 'stechbd-projectpress.js' )
-					]
+					],
+				'st-projectpress-admin-script' =>
+					[
+						'src' => ST_PROJECTPRESS_SITE_JS . 'stechbd-projectpress-admin.js',
+						'dependency' => 'jquery',
+						'version' => filemtime( ST_PROJECTPRESS_JS . 'stechbd-projectpress-admin.js' )
+					],
 			];
 	}
 }

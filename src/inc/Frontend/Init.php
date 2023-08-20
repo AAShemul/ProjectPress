@@ -41,7 +41,7 @@ class Init
 	/**
 	 * The class constructor method to enqueue styles and scripts.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function __construct()
@@ -54,7 +54,7 @@ class Init
 	/**
 	 * Method to load all the assets and enqueue the styles and scripts.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function enqueue_scripts(): void

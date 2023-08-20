@@ -14,7 +14,7 @@
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: August 17, 2023
- * Updated: July 6, 2023
+ * Updated: August 20, 2023
  */
 
 
@@ -41,7 +41,7 @@ class Main
 	 *
 	 * It is prevented from being called more than once by using the 'singleton' design pattern.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	private function __construct()
@@ -75,7 +75,7 @@ class Main
 	/**
 	 * Method to run plugin activation activities.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function activate(): void
@@ -93,7 +93,7 @@ class Main
 	/**
 	 * Method to run plugin deactivation activities.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function deactivate(): void
@@ -106,7 +106,7 @@ class Main
 	 *
 	 * It loads the Admin\Init class if the user is in the admin panel, otherwise it loads the Frontend\Init class.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function init_plugin(): void
@@ -121,7 +121,7 @@ class Main
 	/**
 	 * Method to register a custom post type.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function custom_post_type_project(): void
@@ -169,8 +169,8 @@ class Main
 
 		register_post_type( 'project', $args );
 
-		add_action('add_meta_boxes', [$this, 'add_custom_fields_metabox']);
-		add_action('save_post', [$this, 'save_custom_fields_metabox']);
+		add_action( 'add_meta_boxes', [$this, 'add_custom_fields_metabox'] );
+		add_action( 'save_post', [$this, 'save_custom_fields_metabox'] );
 	}
 
 	public function custom_taxonomy_project_category(): void
@@ -232,7 +232,7 @@ class Main
 	/**
 	 * Method to add a custom fields metabox to the project custom post type.
 	 *
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
 	public function add_custom_fields_metabox(): void
@@ -251,40 +251,90 @@ class Main
 	 * Method to render the custom fields metabox content.
 	 *
 	 * @param mixed $post The post object.
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
-	public function render_custom_fields_metabox(mixed $post): void
+	public function render_custom_fields_metabox( mixed $post ): void
 	{
-		// Retrieve the saved custom field values
-		$link_value = get_post_meta($post->ID, 'link', true);
-		$image_value = get_post_meta($post->ID, 'image', true);
+		$link_value = get_post_meta( $post->ID, 'link', true );
+		$image_value = get_post_meta( $post->ID, 'image', true );
 
-		// Output the custom fields inputs
-		echo '<label for="project-link">Link:</label>';
-		echo '<input type="text" id="project-link" name="project_link" value="' . esc_attr($link_value) . '">';
+		echo '<div class="form-field form-required term-name-wrap">
+					<label for="project-link">Project URL</label>
+					<input name="project_link" id="project-link" type="text" aria-required="true" aria-describedby="project-link-description" value="' . esc_attr( $link_value ) . '">
+					<p id="project-link-description">The url of an external link for the project.</p>
+				</div>';
 
-		echo '<br>';
+		echo '<div class="form-field form-required term-name-wrap">
+					<label for="project-image">Image URL</label> | <a href="#" class="stechbd-projectpress-upload">Upload image</a>
+					<input name="project_image" id="project-image" type="text" aria-required="true" aria-describedby="project-image-description" value="' . esc_attr( $image_value ) . '">
+					<p id="project-image-description">The url of an image for the project.</p>
+				</div>';
 
-		echo '<label for="project-image">Image URL:</label>';
-		echo '<input type="text" id="project-image" name="project_image" value="' . esc_attr($image_value) . '">';
+		echo '<div class="form-field form-required term-name-wrap">
+					<label for="project-image-preview">Image Preview</label>
+					<div id="project-image-preview" class="stechbd-projectpress-image-preview">
+						<img src="' . (esc_attr( $image_value ) ?? 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image') . '" width="50%" height="50%" style="object-fit: cover; object-position: center;" alt="Preview">
+					</div>
+				</div>';
+
+		echo "<script>
+					jQuery(document).ready(function($) {
+						let imageSource = $('#project-image img').attr('src');
+						if ( imageSource === '' || imageSource === undefined ) {
+							$('#project-image-preview img').attr('src', 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image');
+						}
+						
+						/**
+						 * Open media uploader on button clicks to select an image.
+						 *
+						 * @param {function} e The event object.
+						 * @returns {void} Returns nothing.
+						 * @since 1.0.0
+						 */
+						$('.stechbd-projectpress-upload').click(function (e) {
+							e.preventDefault();
+							
+							let image = wp.media({
+								title: 'Upload Image',
+								multiple: false
+							}).open()
+								.on('select', function (e) {
+									let uploaded_image = image.state().get('selection').first();
+									let image_url = uploaded_image.toJSON().url;
+									$('#project-image').val(image_url);
+								});
+						});
+						
+						/**
+						 * Update the link of image preview when user changes the input value.
+						 *
+						 * @returns {void} Returns nothing.
+						 * @since 1.0.0
+						 */
+						$('#project-image').change(function () {
+							let image_url = $(this).val();
+							$('#project-image-preview img').attr('src', image_url);
+						});
+					});
+				</script>";
 	}
 
 	/**
 	 * Method to save the custom fields metabox data.
 	 *
 	 * @param int $post_id The post ID.
-	 * @return void
+	 * @return void Returns nothing.
 	 * @since 1.0.0
 	 */
-	public function save_custom_fields_metabox(int $post_id): void
+	public function save_custom_fields_metabox( int $post_id ): void
 	{
-		if (isset($_POST['project_link'])) {
-			update_post_meta($post_id, 'link', sanitize_text_field($_POST['project_link']));
+		if ( isset( $_POST['project_link'] ) ) {
+			update_post_meta( $post_id, 'link', sanitize_text_field( $_POST['project_link'] ) );
 		}
 
-		if (isset($_POST['project_image'])) {
-			update_post_meta($post_id, 'image', sanitize_text_field($_POST['project_image']));
+		if ( isset( $_POST['project_image'] ) ) {
+			update_post_meta( $post_id, 'image', sanitize_text_field( $_POST['project_image'] ) );
 		}
 	}
 }
