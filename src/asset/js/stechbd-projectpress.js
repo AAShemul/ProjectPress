@@ -34,49 +34,54 @@
 	$(document).ready(function () {
 		console.log('ProjectPress is ready.');
 
-		$('body').append('' +
-			'<div class="stechbd-projectpress-modal">' +
-				'<div class="content">' +
-					'<span class="close">&times;</span>' +
-					'<div class="details">Loading</div>' +
-				'</div>' +
-			'</div>');
+		console.log('This is working.');
 
-		let projectDetails = $('.stechbd-projectpress-modal .details');
-		let html = '' +
-			'<div class="thumbnail"><img src="http://aashemul/STechBD/WP-Plugin/wp-content/uploads/2023/08/Thumbnail.png" alt="A" width="100%"></div>' +
-			'<div class="title">Name</div>' +
-			'<div class="description">Body text</div>';
-		projectDetails.html(html);
+		$('.stechbd-projectpress-preview').click(function () {
+			console.log('ProjectPress modal is clicked.');
 
-		/**
-		 * Function to load the modal.
-		 *
-		 * @param {int} id
-		 * @returns {void}
-		 * @since 1.0.0
-		 */
-		$('.stechbd-projectpress-modal').on('click', function () {
-			console.log('ProjectPress modal is ready.');
-
-			let id = $(this).data('id');
+			$('body').append('' +
+				'<div class="stechbd-projectpress-modal">' +
+					'<div class="content">' +
+						'<span class="close">&times;</span>' +
+						'<div class="details">Loading ...</div>' +
+					'</div>' +
+				'</div>');
 			$('.stechbd-projectpress-modal').fadeIn();
+
+			let json = $(this).data('info');
+			json = JSON.stringify(json);
+			let info = JSON.parse(json);
+			let projectId = info.id;
+			let projectTitle = info.title;
+			let projectThumbnail = info.thumbnail;
+			let projectDescription = info.description;
+			let projectImage = info.image;
+
+			console.log('ID: ' + projectId + ', Title: ' + projectTitle + ', Description: ' + projectDescription + ', Thumbnail: ' + projectThumbnail);
+
+			$('.stechbd-projectpress-modal .details').html(content(projectId, projectTitle, projectThumbnail, projectDescription, projectImage));
 		});
 
-		function loadProjectDetails(projectId) {
-			$.ajax({
-				type: "POST",
-				url: "URL_TO_AJAX_ENDPOINT",
-				data: {action: "load_project_details", project_id: projectId},
-				success: function (data) {
-					projectDetails.html(data);
-				},
-				error: function (error) {
-					console.error("Error loading project details:", error);
-				}
+		console.log('This is also working.');
+
+		$('body').on('click', '.stechbd-projectpress-modal > .content > .close', function () {
+			console.log('Close button is clicked.');
+			const modal = $('.stechbd-projectpress-modal');
+			modal.fadeOut(function () {
+				modal.remove();
 			});
+		});
+
+		function content(id, title, thumbnail, description, image) {
+			return '' +
+				'<div class="thumbnail"><img src="' + thumbnail + '" alt="' + title + '" width="100%"></div>' +
+				'<div class="title">' + title + '</div>' +
+				'<div class="description">' +
+					'<div><strong>Description</strong></div>' +
+					'<div>' + description + '</div>' +
+					'<div><strong>Image</strong></div>' +
+					'<div><img src="' + image + '" alt="' + title + '" width="100%"></div>' +
+				'</div>';
 		}
 	});
-
-
 })(jQuery);

@@ -159,7 +159,7 @@ class Main
 		$args = array (
 			'labels' => $labels,
 			'public' => true,
-			'supports' => array ('title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'),
+			'supports' => array ('title', 'editor', 'thumbnail', 'excerpt', 'author', 'page-attributes'),
 			'label' => __( 'Project', 'stechbd-projectpress' ),
 			'description' => __( 'Project listing.', 'stechbd-projectpress' ),
 			'menu_icon' => 'dashicons-portfolio',
@@ -169,19 +169,8 @@ class Main
 
 		register_post_type( 'project', $args );
 
-		register_meta( 'project', 'link', array (
-			'show_in_rest' => true,
-			'single' => true,
-			'type' => 'string',
-			'auth_callback' => null,
-		) );
-
-		register_meta( 'project', 'image', array (
-			'show_in_rest' => true,
-			'single' => true,
-			'type' => 'string',
-			'auth_callback' => null,
-		) );
+		add_action('add_meta_boxes', [$this, 'add_custom_fields_metabox']);
+		add_action('save_post', [$this, 'save_custom_fields_metabox']);
 	}
 
 	public function custom_taxonomy_project_category(): void
@@ -238,5 +227,64 @@ class Main
 		);
 
 		register_taxonomy( 'project_tag', array ('project'), $args );
+	}
+
+	/**
+	 * Method to add a custom fields metabox to the project custom post type.
+	 *
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function add_custom_fields_metabox(): void
+	{
+		add_meta_box(
+			'project-custom-fields',       // Unique ID for the meta box
+			'Project Custom Fields',       // Title of the meta box
+			[$this, 'render_custom_fields_metabox'], // Callback function to render the metabox content
+			'project',                     // Post type to add the metabox to
+			'normal',                      // Context (normal, advanced, side)
+			'high'                         // Priority (high, core, default, low)
+		);
+	}
+
+	/**
+	 * Method to render the custom fields metabox content.
+	 *
+	 * @param mixed $post The post object.
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function render_custom_fields_metabox(mixed $post): void
+	{
+		// Retrieve the saved custom field values
+		$link_value = get_post_meta($post->ID, 'link', true);
+		$image_value = get_post_meta($post->ID, 'image', true);
+
+		// Output the custom fields inputs
+		echo '<label for="project-link">Link:</label>';
+		echo '<input type="text" id="project-link" name="project_link" value="' . esc_attr($link_value) . '">';
+
+		echo '<br>';
+
+		echo '<label for="project-image">Image URL:</label>';
+		echo '<input type="text" id="project-image" name="project_image" value="' . esc_attr($image_value) . '">';
+	}
+
+	/**
+	 * Method to save the custom fields metabox data.
+	 *
+	 * @param int $post_id The post ID.
+	 * @return void
+	 * @since 1.0.0
+	 */
+	public function save_custom_fields_metabox(int $post_id): void
+	{
+		if (isset($_POST['project_link'])) {
+			update_post_meta($post_id, 'link', sanitize_text_field($_POST['project_link']));
+		}
+
+		if (isset($_POST['project_image'])) {
+			update_post_meta($post_id, 'image', sanitize_text_field($_POST['project_image']));
+		}
 	}
 }

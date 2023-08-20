@@ -20,6 +20,7 @@
 
 namespace STechBD\ProjectPress\Frontend;
 
+use JsonException;
 use WP_Query;
 
 /**
@@ -53,13 +54,14 @@ class Shortcode
 	 * Method to load the shortcode view file.
 	 *
 	 * @return string
+	 * @throws JsonException
 	 * @since 1.0.0
 	 */
 	public function render(): string
 	{
-		$args = array(
-			'post_type'         => 'project',
-			'posts_per_page'    => -1,
+		$args = array (
+			'post_type' => 'project',
+			'posts_per_page' => -1,
 		);
 
 		$projects_query = new WP_Query( $args );
@@ -70,19 +72,32 @@ class Shortcode
 			$content .= '<div class="stechbd-projectpress-grid">';
 			while ( $projects_query->have_posts() ) {
 				$projects_query->the_post();
-				$thumbnail_url = get_the_post_thumbnail_url();
-				$project_title = get_the_title();
-				$project_excerpt = get_the_excerpt();
-				$custom_field_value = get_post_meta( get_the_ID(), 'link', true );
+				$thumbnail = get_the_post_thumbnail_url();
+				$title = get_the_title();
+				$excerpt = get_the_excerpt();
+				$description = get_the_content();
+				$link = get_post_meta( get_the_ID(), 'link', true );
+				$image = get_post_meta( get_the_ID(), 'image', true );
 				$permalink = get_permalink();
 				$id = get_the_ID();
+				$array = array (
+					'id' => $id,
+					'thumbnail' => $thumbnail,
+					'title' => $title,
+					'permalink' => $permalink,
+					'excerpt' => $excerpt,
+					'description' => $description,
+					'link' => $link,
+					'image' => $image,
+				);
+				$json = json_encode( $array, JSON_THROW_ON_ERROR );
+				$json = htmlspecialchars( $json, ENT_QUOTES, 'UTF-8' );
 
-				$content .= '<a href="#" onclick="event.preventDefault();" data-id="' . $id . ');">';
+				$content .= '<a href="#" class="stechbd-projectpress-preview" onclick="event.preventDefault();" data-info="' . $json . '">';
 				$content .= '<div class="item">';
-				$content .= '<img src="' . $thumbnail_url . '" alt="' . $project_title . '">';
-				$content .= '<h3>' . $project_title . '</h3>';
-				$content .= '<p>' . $project_excerpt . '</p>';
-				$content .= '<p>' . $custom_field_value . '</p>';
+				$content .= '<img src="' . $thumbnail . '" alt="' . $title . '">';
+				$content .= '<h3>' . $title . '</h3>';
+				$content .= '<p>' . $excerpt . '</p>';
 				$content .= '</div>';
 				$content .= '</a>';
 			}
