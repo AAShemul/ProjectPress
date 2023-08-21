@@ -20,7 +20,6 @@
 
 namespace STechBD\ProjectPress\Frontend;
 
-use JsonException;
 use WP_Query;
 
 /**
@@ -54,56 +53,53 @@ class Shortcode
 	 * Method to load the shortcode view file.
 	 *
 	 * @return string
-	 * @throws JsonException
 	 * @since 1.0.0
 	 */
 	public function render(): string
 	{
-		$args = array (
+		$args = array(
 			'post_type' => 'project',
 			'posts_per_page' => -1,
 		);
 
-		$projects_query = new WP_Query( $args );
+		$projects_query = new WP_Query($args);
 
 		$content = '';
 
-		if ( $projects_query->have_posts() ) {
+		if ($projects_query->have_posts()) {
 			$content .= '<div class="stechbd-projectpress-grid">';
-			while ( $projects_query->have_posts() ) {
+			while ($projects_query->have_posts()) {
 				$projects_query->the_post();
+				$id = get_the_ID();
 				$thumbnail = get_the_post_thumbnail_url();
 				$title = get_the_title();
 				$excerpt = get_the_excerpt();
 				$description = get_the_content();
-				$link = get_post_meta( get_the_ID(), 'link', true );
-				$image = get_post_meta( get_the_ID(), 'image', true );
+				$link = get_post_meta($id, 'link', true);
+				$image = get_post_meta($id, 'image', true);
 				$permalink = get_permalink();
-				$id = get_the_ID();
-				$array = array (
-					'id' => $id,
-					'thumbnail' => $thumbnail,
-					'title' => $title,
-					'permalink' => $permalink,
-					'excerpt' => $excerpt,
-					'description' => $description,
-					'link' => $link,
-					'image' => $image,
-				);
-				$json = json_encode( $array, JSON_THROW_ON_ERROR );
-				$json = htmlspecialchars( $json, ENT_QUOTES, 'UTF-8' );
+				$categories = wp_get_post_terms($id, 'project_category', array('fields' => 'names'));
+				$category = !empty($categories) ? implode(', ', $categories) : '';
+				$tags = wp_get_post_terms($id, 'project_tag', array('fields' => 'names'));
+				$tag = !empty($tags) ? implode(', ', $tags) : '';
 
-				$content .= '<a href="#" class="stechbd-projectpress-preview" onclick="event.preventDefault();" data-info="' . $json . '">';
-				$content .= '<div class="item">';
-				$content .= '<img src="' . $thumbnail . '" alt="' . $title . '">';
-				$content .= '<h3>' . $title . '</h3>';
-				$content .= '<p>' . $excerpt . '</p>';
-				$content .= '</div>';
-				$content .= '</a>';
+				$content .= '<a href="#" class="preview" onclick="event.preventDefault();" data-id="' . $id . '" data-category="' . $category . '">
+                            <div class="item">
+                                <img src="' . $thumbnail . '" alt="' . $title . '">
+                                <p class="category">' . $category . '</p>
+                                <h2>' . $title . '</h2>
+                                <p>' . $excerpt . '</p>
+                            </div>
+                        </a>';
 			}
+
 			$content .= '</div>';
 		}
 
+		// Restore global post data
+		wp_reset_postdata();
+
 		return $content;
 	}
+
 }

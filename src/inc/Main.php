@@ -53,6 +53,7 @@ class Main
 		add_action( 'init', [$this, 'custom_post_type_project'], 0 );
 		add_action( 'init', [$this, 'custom_taxonomy_project_category'], 0 );
 		add_action( 'init', [$this, 'custom_taxonomy_project_tag'], 0 );
+		add_action( 'rest_api_init', [$this, 'register_rest_field'] );
 	}
 
 	/**
@@ -165,6 +166,7 @@ class Main
 			'menu_icon' => 'dashicons-portfolio',
 			'post_type' => 'project',
 			'has_archive' => true,
+			'show_in_rest' => true,
 		);
 
 		register_post_type( 'project', $args );
@@ -274,7 +276,7 @@ class Main
 		echo '<div class="form-field form-required term-name-wrap">
 					<label for="project-image-preview">Image Preview</label>
 					<div id="project-image-preview" class="stechbd-projectpress-image-preview">
-						<img src="' . (esc_attr( $image_value ) ?? 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image') . '" width="50%" height="50%" style="object-fit: cover; object-position: center;" alt="Preview">
+						<img src="' . ( esc_attr( $image_value ) ?? 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image' ) . '" width="50%" height="50%" style="object-fit: cover; object-position: center;" alt="Preview">
 					</div>
 				</div>';
 
@@ -336,5 +338,43 @@ class Main
 		if ( isset( $_POST['project_image'] ) ) {
 			update_post_meta( $post_id, 'image', sanitize_text_field( $_POST['project_image'] ) );
 		}
+	}
+
+	/**
+	 * Add taxonomy data to REST API response for custom post type "project"
+	 *
+	 * @param array $post The post object.
+	 * @param mixed $request The request object.
+	 * @return array Returns the post object with categories and tags.
+	 * @since 1.0.0
+	 */
+	public function add_rest_taxonomy( array $post, mixed $request ): array
+	{
+		$post_id = $post['id'];
+		$category = wp_get_post_terms( $post_id, 'project_category', array ('fields' => 'names') );
+		$tag = wp_get_post_terms( $post_id, 'project_tag', array ('fields' => 'names') );
+		$link = get_post_meta( $post_id, 'link', true );
+		$image = get_post_meta( $post_id, 'image', true );
+
+		return array (
+			'category' => $category,
+			'tag' => $tag,
+			'link' => $link,
+			'image' => $image,
+		);
+	}
+
+	/**
+	 * Register the REST API field for categories and tags.
+	 *
+	 * @return void Returns nothing.
+	 * @since 1.0.0
+	 */
+	public function register_rest_field(): void
+	{
+		register_rest_field( 'project', 'taxonomy', array (
+			'get_callback' => [$this, 'add_rest_taxonomy'],
+			'schema' => null,
+		) );
 	}
 }

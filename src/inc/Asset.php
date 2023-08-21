@@ -58,7 +58,6 @@ class Asset
 		$style = $this->style();
 		$script = $this->script();
 
-
 		foreach ( $style as $name => $value ) {
 			wp_register_style( $name, $value['src'], $value['dependency'], $value['version'] );
 		}
@@ -66,6 +65,16 @@ class Asset
 		foreach ( $script as $name => $value ) {
 			wp_register_script( $name, $value['src'], $value['dependency'], $value['version'] );
 		}
+
+		wp_localize_script( 'st-projectpress-script', 'stechbdProjectPress', [
+			'siteURL' => get_site_url() . '/',
+			'restURL' => get_site_url() . '/wp-json/wp/v2/',
+			'restPostURL' => get_site_url() . '/wp-json/wp/v2/posts/',
+			'restMediaURL' => get_site_url() . '/wp-json/wp/v2/media/',
+			'restProjectURL' => get_site_url() . '/wp-json/wp/v2/project/',
+			'ajaxURL' => admin_url( 'admin-ajax.php' ),
+			'nonce' => wp_create_nonce( 'stechbd-projectpress-nonce' ),
+		] );
 	}
 
 	/**
