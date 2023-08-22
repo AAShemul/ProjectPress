@@ -13,8 +13,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 17, 2023
- * Updated: July 6, 2023
+ * Created: August 17, 2023
+ * Updated: August 21, 2023
  */
 
 
@@ -99,6 +99,7 @@ class Init
 	 */
 	public function project_ajax(): void
 	{
+		/********* To be deleted ***********/
 		/*if ( isset( $_POST['project_id'] ) && is_numeric( $_POST['project_id'] ) ) {
 			$project_id = (int) $_POST['project_id'];
 
@@ -125,7 +126,7 @@ class Init
 		// If the project ID is not provided or not valid
 		wp_send_json_error( array ('error' => 'Invalid project ID.') );*/
 
-		if ( check_ajax_referer( 'stechbd-projectpress-nonce', 'security' && $_POST['action'] === 'project_ajax' ) ) {
+		if ( check_ajax_referer( 'stechbd-projectpress', 'security' && $_POST['action'] === 'project_ajax' ) ) {
 			// Example response
 			$response = array (
 				'title' => 'Project Title',

@@ -11,17 +11,65 @@
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: August 17, 2023
- * Updated: August 19, 2023
+ * Updated: August 21, 2023
  */
 
 
 /**
  * Grid
  */
+/********** Filter **********/
+.stechbd-projectpress-filter {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin-bottom: 20px;
+}
+
+.stechbd-projectpress-filter .option {
+	display: inline-block;
+	padding: 5px 10px;
+	background-color: #1a1a1a;
+	color: #fff;
+	border: 1px solid #1a1a1a;
+	border-radius: 5px;
+	text-decoration: none;
+	margin: 0 10px;
+	font-size: medium;
+}
+
+.stechbd-projectpress-filter .active {
+	background-color: #fff;
+	color: #1a1a1a;
+}
+
+/********** Sort **********/
+.stechbd-projectpress-sort {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.stechbd-projectpress-sort .short {
+	text-decoration: none;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.stechbd-projectpress-sort .short.active {
+	color: #1a1a1a;
+	font-weight: bold;
+}
+
+/********** Grid **********/
 .stechbd-projectpress-grid {
+	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 20px;
+	justify-items: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .stechbd-projectpress-grid a:link,
@@ -29,26 +77,27 @@
 	text-decoration: none;
 }
 
-.stechbd-projectpress-grid .item {
+.stechbd-projectpress-grid a .item {
 	border: 1px solid #ddd;
 	padding: 20px;
 	text-align: center;
 	background-color: #f9f9f9;
 	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	max-width: 350px;
 }
 
-.stechbd-projectpress-grid .item:hover {
+.stechbd-projectpress-grid a .item:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.stechbd-projectpress-grid .item img {
+.stechbd-projectpress-grid a .item img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 5px;
 }
 
-.stechbd-projectpress-grid .item .category {
+.stechbd-projectpress-grid a .item .category {
 	display: inline-block;
 	padding: 5px;
 	background-color: #1a1a1a;
@@ -91,13 +140,38 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
+.stechbd-projectpress-modal .content .loading {
+	/*background: #0a4b78;*/
+}
+
+.stechbd-projectpress-modal .content .loading .spinner {
+	border: 4px solid rgba(255, 255, 255, 0.3);
+	border-top: 4px solid black;
+	border-radius: 50%;
+	width: 40px;
+	height: 40px;
+	animation: spin 2s linear infinite;
+	margin: auto;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
 .stechbd-projectpress-modal .content .close {
 	position: absolute;
-	top: 0;
+	top: 5px;
 	right: 10px;
 	font-size: 20px;
 	font-weight: bold;
 	cursor: pointer;
+	text-align: center;
 }
 
 .stechbd-projectpress-modal .content .details {
@@ -121,8 +195,13 @@
 	text-align: center;
 }
 
-.stechbd-projectpress-modal .content .details .head h2 {
+.stechbd-projectpress-modal .content .details .head h3 {
 	text-align: center;
+	margin-bottom: 0;
+}
+
+.stechbd-projectpress-modal .content .details .head p {
+	margin-top: 0;
 }
 
 .stechbd-projectpress-modal .content .details .head .button {

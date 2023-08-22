@@ -13,8 +13,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 15, 2023
- * Updated: July 6, 2023
+ * Created: August 17, 2023
+ * Updated: August 22, 2023
  */
 
 
@@ -55,7 +55,7 @@ class Settings
 	 */
 	public function form_handler(): void
 	{
-		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['submitNotice'] ) ) {
+		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['submitProjectPress'] ) ) {
 			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'stechbd-projectpress' ) ) {
 				wp_die( '<h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
 			}
@@ -64,18 +64,18 @@ class Settings
 				wp_die( '<h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
 			}
 
-			$notice = get_option( 'stechbd_projectpress_notice' );
-			$noticeVal = wp_unslash( $_POST['notice'] );
+			$delete = get_option( 'stechbd_projectpress_delete_projects' );
+			$deleteVal = $_POST['delete_projects'];
 
-			if ( ! empty( $noticeVal ) ) {
-				if ( $notice === $noticeVal ) {
-					add_settings_error( 'stechbd-projectpress', 'error', 'Same notice already exists!' );
+			if ( ! empty( $deleteVal ) ) {
+				if ( $delete === $deleteVal ) {
+					add_settings_error( 'stechbd-projectpress', 'error', 'Same valur already exists!' );
 				} else {
-					update_option( 'stechbd_projectpress_notice', $noticeVal );
-					add_settings_error( 'stechbd-projectpress', 'success', 'Notice updated successfully!', 'updated' );
+					update_option( 'stechbd_projectpress_delete_projects', $deleteVal );
+					add_settings_error( 'stechbd-projectpress', 'success', 'Setting value updated successfully!', 'updated' );
 				}
 			} else {
-				add_settings_error( 'stechbd-projectpress', 'error', 'Please insert a value!' );
+				add_settings_error( 'stechbd-projectpress', 'error', 'Please select an option!' );
 			}
 		}
 	}

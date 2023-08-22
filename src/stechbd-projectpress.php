@@ -14,7 +14,7 @@
  * Tested up to: 6.2.2
  * Requires PHP: 8.0
  * Created: August 17, 2023
- * Updated: July 6, 2023
+ * Updated: August 17, 2023
  * Text Domain: stechbd-projectpress
  * Domain Path: /languages
  * License: GPL v3

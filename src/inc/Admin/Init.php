@@ -13,8 +13,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 17, 2023
- * Updated: July 6, 2023
+ * Created: August 17, 2023
+ * Updated: August 17, 2023
  */
 
 
@@ -47,7 +47,7 @@ class Init
 	public function __construct()
 	{
 		add_action( 'admin_enqueue_scripts', [$this, 'enqueue_scripts'] );
-		
+
 		new Menu();
 	}
 
@@ -60,7 +60,7 @@ class Init
 	public function enqueue_scripts(): void
 	{
 		new Asset();
-		
+
 		wp_enqueue_script( 'jquery' );
 		wp_enqueue_script( 'st-projectpress-admin-script' );
 	}

@@ -14,11 +14,14 @@
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
  * Created: August 17, 2023
- * Updated: August 20, 2023
+ * Updated: August 22, 2023
  */
 
 
 namespace STechBD\ProjectPress;
+
+use Throwable;
+use WP_Query;
 
 /**
  * Exit if accessed directly.
@@ -50,6 +53,8 @@ class Main
 		register_deactivation_hook( ST_PROJECTPRESS_FILE, [$this, 'deactivate'] );
 		add_action( 'plugins_loaded', [$this, 'init_plugin'] );
 
+		add_filter( 'use_block_editor_for_post_type', [$this, 'disable_block_editor'], 10, 2 );
+
 		add_action( 'init', [$this, 'custom_post_type_project'], 0 );
 		add_action( 'init', [$this, 'custom_taxonomy_project_category'], 0 );
 		add_action( 'init', [$this, 'custom_taxonomy_project_tag'], 0 );
@@ -77,10 +82,16 @@ class Main
 	 * Method to run plugin activation activities.
 	 *
 	 * @return void Returns nothing.
+	 * @throws Throwable
 	 * @since 1.0.0
 	 */
 	public function activate(): void
 	{
+		/**
+		 * Check and update options for the plugin.
+		 *
+		 * @since 1.0.0
+		 */
 		$installed = get_option( 'stechbd_projectpress_installed' );
 
 		if ( ! $installed ) {
@@ -89,6 +100,32 @@ class Main
 
 		update_option( 'stechbd_projectpress_version', ST_PROJECTPRESS_VERSION );
 		update_option( 'stechbd_projectpress_version_code', ST_PROJECTPRESS_VERSION_CODE );
+		update_option( 'stechbd_projectpress_delete_projects', 'false' );
+
+		/**
+		 * Create the projects showcase page for the plugin.
+		 *
+		 * @since 1.0.0
+		 */
+		$slug = wp_unique_post_slug( sanitize_title( 'projects' ), 0, 'publish', 'page', 0 );
+
+		if ( ! empty( $slug ) ) {
+			$page_data = array (
+				'post_title' => 'Projects',
+				'post_content' => '[ProjectPress]',
+				'post_status' => 'publish',
+				'post_author' => get_current_user_id(),
+				'post_type' => 'page',
+				'post_name' => $slug,
+			);
+
+			try {
+				$page_id = wp_insert_post( $page_data );
+				update_option( 'stechbd_projectpress_page_id', $page_id );
+			} catch ( Throwable $error ) {
+				add_settings_error( 'stechbd-projectpress', 'error', 'Project page couldn\'t create. Please create it manually with content of "[ProjectPress]" shortcode.' );
+			}
+		}
 	}
 
 	/**
@@ -99,7 +136,63 @@ class Main
 	 */
 	public function deactivate(): void
 	{
-		// To be added later.
+		/**
+		 * Delete all the projects and taxonomies on plugin deactivation.
+		 * The option is set from the admin Settings page.
+		 *
+		 * @since 1.0.0
+		 */
+		$option = get_option( 'stechbd_projectpress_delete_projects' );
+
+		if ( $option === 'true' ) {
+			$args = array (
+				'post_type' => 'project',
+				'posts_per_page' => -1,
+			);
+
+			$projects_query = new WP_Query( $args );
+
+			if ( $projects_query->have_posts() ) {
+				while ( $projects_query->have_posts() ) {
+					$projects_query->the_post();
+					$post_id = get_the_ID();
+					wp_delete_post( $post_id, true );
+				}
+			}
+
+			$categories = get_terms( array (
+				'taxonomy' => 'project_category',
+				'hide_empty' => false,
+			) );
+
+			foreach ( $categories as $category ) {
+				wp_delete_term( $category->term_id, 'project_category' );
+			}
+
+			$tags = get_terms( array (
+				'taxonomy' => 'project_tag',
+				'hide_empty' => false,
+			) );
+
+			foreach ( $tags as $tag ) {
+				wp_delete_term( $tag->term_id, 'project_tag' );
+			}
+		}
+
+		delete_option( 'stechbd_projectpress_delete_projects' );
+
+		/**
+		 * Delete the projects showcase page.
+		 *
+		 * @since 1.0.0
+		 */
+		$page_id = get_option( 'stechbd_projectpress_page_id' );
+
+		if ( ! empty( $page_id ) ) {
+			wp_delete_post( $page_id, true );
+		}
+
+		delete_option( 'stechbd_projectpress_page_id' );
 	}
 
 	/**
@@ -117,6 +210,23 @@ class Main
 		} else {
 			new Frontend\Init();
 		}
+	}
+
+	/**
+	 * Method to disable block editor for the 'project' post type.
+	 *
+	 * @param $use_block_editor
+	 * @param $post_type
+	 * @return false|mixed
+	 * @since 1.0.0
+	 */
+	public function disable_block_editor( $use_block_editor, $post_type ): mixed
+	{
+		if ( $post_type === 'project' ) {
+			return false;
+		}
+
+		return $use_block_editor;
 	}
 
 	/**
@@ -344,11 +454,10 @@ class Main
 	 * Add taxonomy data to REST API response for custom post type "project"
 	 *
 	 * @param array $post The post object.
-	 * @param mixed $request The request object.
 	 * @return array Returns the post object with categories and tags.
 	 * @since 1.0.0
 	 */
-	public function add_rest_taxonomy( array $post, mixed $request ): array
+	public function add_rest_taxonomy( array $post ): array
 	{
 		$post_id = $post['id'];
 		$category = wp_get_post_terms( $post_id, 'project_category', array ('fields' => 'names') );
@@ -365,6 +474,22 @@ class Main
 	}
 
 	/**
+	 * Add plugin data to REST API response for custom post type "project"
+	 *
+	 * @return array Returns the plugin data.
+	 * @since 1.0.0
+	 */
+	public function add_rest_generator(): array
+	{
+		return array (
+			'name' => 'ProjectPress',
+			'version' => ST_PROJECTPRESS_VERSION,
+			'version_code' => ST_PROJECTPRESS_VERSION_CODE,
+			'id' => 'stechbd-projectpress',
+		);
+	}
+
+	/**
 	 * Register the REST API field for categories and tags.
 	 *
 	 * @return void Returns nothing.
@@ -374,6 +499,11 @@ class Main
 	{
 		register_rest_field( 'project', 'taxonomy', array (
 			'get_callback' => [$this, 'add_rest_taxonomy'],
+			'schema' => null,
+		) );
+
+		register_rest_field( 'project', 'generator', array (
+			'get_callback' => [$this, 'add_rest_generator'],
 			'schema' => null,
 		) );
 	}

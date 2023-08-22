@@ -26,7 +26,7 @@
 	'use strict';
 
 	let imageSource = $('#project-image img').attr('src');
-	if ( imageSource === '' || imageSource === undefined ) {
+	if (imageSource === '' || imageSource === undefined) {
 		$('#project-image-preview img').attr('src', 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image');
 	}
 

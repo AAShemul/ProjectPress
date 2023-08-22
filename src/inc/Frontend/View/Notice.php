@@ -37,10 +37,5 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 ?>
 <div class="stechbd-projectpress">
-	<div class="notice">
-		<?= get_option( 'stechbd_projectpress_notice' ) ?>
-	</div>
-	<div class="close">
-		Got it
-	</div>
+
 </div>

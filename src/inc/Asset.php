@@ -13,8 +13,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 29, 2023
- * Updated: July 6, 2023
+ * Created: August 17, 2023
+ * Updated: August 21, 2023
  */
 
 
@@ -73,7 +73,7 @@ class Asset
 			'restMediaURL' => get_site_url() . '/wp-json/wp/v2/media/',
 			'restProjectURL' => get_site_url() . '/wp-json/wp/v2/project/',
 			'ajaxURL' => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce( 'stechbd-projectpress-nonce' ),
+			'nonce' => wp_create_nonce( 'stechbd-projectpress' ),
 		] );
 	}
 

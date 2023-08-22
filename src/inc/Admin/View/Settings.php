@@ -13,8 +13,8 @@
  * Developer: S Technologies
  * Homepage: https://www.stechbd.net
  * Contact: product@stechbd.net
- * Created: June 17, 2023
- * Updated: July 6, 2023
+ * Created: August 17, 2023
+ * Updated: August 17, 2023
  */
 
 
@@ -40,27 +40,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<hr class="wp-header-end">
 	<?php settings_errors( 'stechbd-projectpress' ) ?>
 	<div id="ajax-response"></div>
-	<p><?php _e( 'Put your custom notice for cookie policy.', 'stechbd-projectpress' ) ?></p>
-	<form method="post" name="notice" id="notice" class="validate">
+	<p><?php _e( 'Choose whether all your created projects to be kept or deleted on the deactivation of ProjectPress.', 'stechbd-projectpress' ) ?></p>
+	<form method="post" name="settings" id="settings" class="validate">
 		<table class="form-table" role="presentation">
 			<tbody>
 			<tr class="form-field form-required">
 				<th scope="row">
-					<?php _e( 'Custom Notice', 'stechbd-projectpress' ) ?> <span
-							class="description">(<?php _e( 'optional', 'stechbd-projectpress' ) ?>)</span>
+					<?php _e( 'Delete all projects on plugin deactivation', 'stechbd-projectpress' ) ?> <span
+							class="description">(<?php _e( 'Optional', 'stechbd-projectpress' ) ?>)</span>
 				</th>
 				<td>
 					<label>
-						<textarea
-								placeholder="This website uses cookies to improve your experience. &lt;strong&gt;&lt;a href=&quot;<?= ST_PROJECTPRESS_SITE ?>privacy-policy/&quot;&gt;Learn More&lt;/a&gt;&lt;/strong&gt;"
-								rows="4" cols="70" id="notice"
-								name="notice"><?= get_option( 'stechbd_projectpress_notice' ) ?></textarea>
-					</label>
+						<select name="delete_projects" id="delete_projects">
+							<option value="true" <?php selected( get_option( 'stechbd_projectpress_delete_projects' ), 'true' ) ?>><?php _e( 'Yes', 'stechbd-projectpress' ) ?></option>
+							<option value="false" <?php selected( get_option( 'stechbd_projectpress_delete_projects' ), 'false' ) ?>><?php _e( 'No', 'stechbd-projectpress' ) ?></option>
+						</select>
 				</td>
 			</tr>
 			</tbody>
 		</table>
 		<?php wp_nonce_field( 'stechbd-projectpress' ) ?>
-		<?php submit_button( __( 'Save', 'stechbd-projectpress' ), 'button-primary', 'submitNotice' ) ?>
+		<?php submit_button( __( 'Save', 'stechbd-projectpress' ), 'button-primary', 'submitProjectPress' ) ?>
 	</form>
 </div>
