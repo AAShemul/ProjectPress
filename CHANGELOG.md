@@ -1,4 +1,4 @@
-# Changelog of CookieCons
+# Changelog of ProjectPress
 
 All notable changes to this project will be documented in this file.
 

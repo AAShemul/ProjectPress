@@ -3,22 +3,18 @@
 
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 21, 2023
  */
 
 
-namespace STechBD\ProjectPress;
+namespace ProjectPress;
 
 /**
  * Exit if accessed directly.
@@ -26,7 +22,7 @@ namespace STechBD\ProjectPress;
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
+	die( '<title>Access Denied | ProjectPress</title><h1>ProjectPress</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -66,14 +62,14 @@ class Asset
 			wp_register_script( $name, $value['src'], $value['dependency'], $value['version'] );
 		}
 
-		wp_localize_script( 'st-projectpress-script', 'stechbdProjectPress', [
+		wp_localize_script( 'projectpress-script', 'ProjectPress', [
 			'siteURL' => get_site_url() . '/',
 			'restURL' => get_site_url() . '/wp-json/wp/v2/',
 			'restPostURL' => get_site_url() . '/wp-json/wp/v2/posts/',
 			'restMediaURL' => get_site_url() . '/wp-json/wp/v2/media/',
 			'restProjectURL' => get_site_url() . '/wp-json/wp/v2/project/',
 			'ajaxURL' => admin_url( 'admin-ajax.php' ),
-			'nonce' => wp_create_nonce( 'stechbd-projectpress' ),
+			'nonce' => wp_create_nonce( 'projectpress' ),
 		] );
 	}
 
@@ -87,11 +83,11 @@ class Asset
 	{
 		return
 			[
-				'st-projectpress-style' =>
+				'projectpress-style' =>
 					[
-						'src' => ST_PROJECTPRESS_SITE_CSS . 'stechbd-projectpress.css',
+						'src' => PROJECTPRESS_SITE_CSS . 'projectpress.css',
 						'dependency' => false,
-						'version' => filemtime( ST_PROJECTPRESS_CSS . 'stechbd-projectpress.css' )
+						'version' => filemtime( PROJECTPRESS_CSS . 'projectpress.css' )
 					]
 			];
 	}
@@ -106,17 +102,17 @@ class Asset
 	{
 		return
 			[
-				'st-projectpress-script' =>
+				'projectpress-script' =>
 					[
-						'src' => ST_PROJECTPRESS_SITE_JS . 'stechbd-projectpress.js',
+						'src' => PROJECTPRESS_SITE_JS . 'projectpress.js',
 						'dependency' => 'jquery',
-						'version' => filemtime( ST_PROJECTPRESS_JS . 'stechbd-projectpress.js' )
+						'version' => filemtime( PROJECTPRESS_JS . 'projectpress.js' )
 					],
-				'st-projectpress-admin-script' =>
+				'projectpress-admin-script' =>
 					[
-						'src' => ST_PROJECTPRESS_SITE_JS . 'stechbd-projectpress-admin.js',
+						'src' => PROJECTPRESS_SITE_JS . 'projectpress-admin.js',
 						'dependency' => 'jquery',
-						'version' => filemtime( ST_PROJECTPRESS_JS . 'stechbd-projectpress-admin.js' )
+						'version' => filemtime( PROJECTPRESS_JS . 'projectpress-admin.js' )
 					],
 			];
 	}

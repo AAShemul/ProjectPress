@@ -3,22 +3,18 @@
 
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 22, 2023
  */
 
 
-namespace STechBD\ProjectPress;
+namespace ProjectPress;
 
 use Throwable;
 use WP_Query;
@@ -29,7 +25,7 @@ use WP_Query;
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
+	die( '<title>Access Denied | ProjectPress</title><h1>ProjectPress</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -49,8 +45,8 @@ class Main
 	 */
 	private function __construct()
 	{
-		register_activation_hook( ST_PROJECTPRESS_FILE, [$this, 'activate'] );
-		register_deactivation_hook( ST_PROJECTPRESS_FILE, [$this, 'deactivate'] );
+		register_activation_hook( PROJECTPRESS_FILE, [$this, 'activate'] );
+		register_deactivation_hook( PROJECTPRESS_FILE, [$this, 'deactivate'] );
 		add_action( 'plugins_loaded', [$this, 'init_plugin'] );
 
 		add_filter( 'use_block_editor_for_post_type', [$this, 'disable_block_editor'], 10, 2 );
@@ -98,8 +94,8 @@ class Main
 			update_option( 'stechbd_projectpress_installed', time() );
 		}
 
-		update_option( 'stechbd_projectpress_version', ST_PROJECTPRESS_VERSION );
-		update_option( 'stechbd_projectpress_version_code', ST_PROJECTPRESS_VERSION_CODE );
+		update_option( 'stechbd_projectpress_version', PROJECTPRESS_VERSION );
+		update_option( 'stechbd_projectpress_version_code', PROJECTPRESS_VERSION_CODE );
 		update_option( 'stechbd_projectpress_delete_projects', 'false' );
 
 		/**
@@ -123,7 +119,7 @@ class Main
 				$page_id = wp_insert_post( $page_data );
 				update_option( 'stechbd_projectpress_page_id', $page_id );
 			} catch ( Throwable $error ) {
-				add_settings_error( 'stechbd-projectpress', 'error', 'Project page couldn\'t create. Please create it manually with content of "[ProjectPress]" shortcode.' );
+				add_settings_error( 'projectpress', 'error', 'Project page couldn\'t create. Please create it manually with content of "[ProjectPress]" shortcode.' );
 			}
 		}
 	}
@@ -238,41 +234,41 @@ class Main
 	public function custom_post_type_project(): void
 	{
 		$labels = array (
-			'name' => _x( 'Projects', 'Post Type General Name', 'stechbd-projectpress' ),
-			'singular_name' => _x( 'Project', 'Post Type Singular Name', 'stechbd-projectpress' ),
-			'add_new' => __( 'Add New', 'stechbd-projectpress' ),
-			'add_new_item' => __( 'Add New Project', 'stechbd-projectpress' ),
-			'edit_item' => __( 'Edit Project', 'stechbd-projectpress' ),
-			'new_item' => __( 'New Project', 'stechbd-projectpress' ),
-			'view_item' => __( 'View Project', 'stechbd-projectpress' ),
-			'search_items' => __( 'Search Project', 'stechbd-projectpress' ),
-			'not_found' => __( 'Not found', 'stechbd-projectpress' ),
-			'not_found_in_trash' => __( 'Not found in Trash', 'stechbd-projectpress' ),
-			'menu_name' => __( 'Projects', 'stechbd-projectpress' ),
-			'all_items' => __( 'All Projects', 'stechbd-projectpress' ),
-			'featured_image' => __( 'Thumbnail', 'stechbd-projectpress' ),
-			'set_featured_image' => __( 'Set thumbnail', 'stechbd-projectpress' ),
-			'remove_featured_image' => __( 'Remove thumbnail', 'stechbd-projectpress' ),
-			'use_featured_image' => __( 'Use as thumbnail', 'stechbd-projectpress' ),
-			'name_admin_bar' => __( 'Project', 'stechbd-projectpress' ),
-			'archives' => __( 'Project Archives', 'stechbd-projectpress' ),
-			'attributes' => __( 'Project Attributes', 'stechbd-projectpress' ),
-			'parent_item_colon' => __( 'Parent Project:', 'stechbd-projectpress' ),
-			'update_item' => __( 'Update Project', 'stechbd-projectpress' ),
-			'view_items' => __( 'View Projects', 'stechbd-projectpress' ),
-			'insert_into_item' => __( 'Insert into project', 'stechbd-projectpress' ),
-			'uploaded_to_this_item' => __( 'Uploaded to this project', 'stechbd-projectpress' ),
-			'items_list' => __( 'Projects list', 'stechbd-projectpress' ),
-			'items_list_navigation' => __( 'Projects list navigation', 'stechbd-projectpress' ),
-			'filter_items_list' => __( 'Filter projects list', 'stechbd-projectpress' ),
+			'name' => _x( 'Projects', 'Post Type General Name', 'projectpress' ),
+			'singular_name' => _x( 'Project', 'Post Type Singular Name', 'projectpress' ),
+			'add_new' => __( 'Add New', 'projectpress' ),
+			'add_new_item' => __( 'Add New Project', 'projectpress' ),
+			'edit_item' => __( 'Edit Project', 'projectpress' ),
+			'new_item' => __( 'New Project', 'projectpress' ),
+			'view_item' => __( 'View Project', 'projectpress' ),
+			'search_items' => __( 'Search Project', 'projectpress' ),
+			'not_found' => __( 'Not found', 'projectpress' ),
+			'not_found_in_trash' => __( 'Not found in Trash', 'projectpress' ),
+			'menu_name' => __( 'Projects', 'projectpress' ),
+			'all_items' => __( 'All Projects', 'projectpress' ),
+			'featured_image' => __( 'Thumbnail', 'projectpress' ),
+			'set_featured_image' => __( 'Set thumbnail', 'projectpress' ),
+			'remove_featured_image' => __( 'Remove thumbnail', 'projectpress' ),
+			'use_featured_image' => __( 'Use as thumbnail', 'projectpress' ),
+			'name_admin_bar' => __( 'Project', 'projectpress' ),
+			'archives' => __( 'Project Archives', 'projectpress' ),
+			'attributes' => __( 'Project Attributes', 'projectpress' ),
+			'parent_item_colon' => __( 'Parent Project:', 'projectpress' ),
+			'update_item' => __( 'Update Project', 'projectpress' ),
+			'view_items' => __( 'View Projects', 'projectpress' ),
+			'insert_into_item' => __( 'Insert into project', 'projectpress' ),
+			'uploaded_to_this_item' => __( 'Uploaded to this project', 'projectpress' ),
+			'items_list' => __( 'Projects list', 'projectpress' ),
+			'items_list_navigation' => __( 'Projects list navigation', 'projectpress' ),
+			'filter_items_list' => __( 'Filter projects list', 'projectpress' ),
 		);
 
 		$args = array (
 			'labels' => $labels,
 			'public' => true,
 			'supports' => array ('title', 'editor', 'thumbnail', 'excerpt', 'author', 'page-attributes'),
-			'label' => __( 'Project', 'stechbd-projectpress' ),
-			'description' => __( 'Project listing.', 'stechbd-projectpress' ),
+			'label' => __( 'Project', 'projectpress' ),
+			'description' => __( 'Project listing.', 'projectpress' ),
 			'menu_icon' => 'dashicons-portfolio',
 			'post_type' => 'project',
 			'has_archive' => true,
@@ -288,17 +284,17 @@ class Main
 	public function custom_taxonomy_project_category(): void
 	{
 		$labels = array (
-			'name' => _x( 'Project Categories', 'taxonomy general name', 'stechbd-projectpress' ),
-			'singular_name' => _x( 'Project Category', 'taxonomy singular name', 'stechbd-projectpress' ),
-			'search_items' => __( 'Search Project Categories', 'stechbd-projectpress' ),
-			'all_items' => __( 'All Project Categories', 'stechbd-projectpress' ),
-			'parent_item' => __( 'Parent Project Category', 'stechbd-projectpress' ),
-			'parent_item_colon' => __( 'Parent Project Category:', 'stechbd-projectpress' ),
-			'edit_item' => __( 'Edit Project Category', 'stechbd-projectpress' ),
-			'update_item' => __( 'Update Project Category', 'stechbd-projectpress' ),
-			'add_new_item' => __( 'Add New Project Category', 'stechbd-projectpress' ),
-			'new_item_name' => __( 'New Project Category Name', 'stechbd-projectpress' ),
-			'menu_name' => __( 'Project Categories', 'stechbd-projectpress' ),
+			'name' => _x( 'Project Categories', 'taxonomy general name', 'projectpress' ),
+			'singular_name' => _x( 'Project Category', 'taxonomy singular name', 'projectpress' ),
+			'search_items' => __( 'Search Project Categories', 'projectpress' ),
+			'all_items' => __( 'All Project Categories', 'projectpress' ),
+			'parent_item' => __( 'Parent Project Category', 'projectpress' ),
+			'parent_item_colon' => __( 'Parent Project Category:', 'projectpress' ),
+			'edit_item' => __( 'Edit Project Category', 'projectpress' ),
+			'update_item' => __( 'Update Project Category', 'projectpress' ),
+			'add_new_item' => __( 'Add New Project Category', 'projectpress' ),
+			'new_item_name' => __( 'New Project Category Name', 'projectpress' ),
+			'menu_name' => __( 'Project Categories', 'projectpress' ),
 		);
 
 		$args = array (
@@ -316,17 +312,17 @@ class Main
 	public function custom_taxonomy_project_tag(): void
 	{
 		$labels = array (
-			'name' => _x( 'Project Tags', 'taxonomy general name', 'stechbd-projectpress' ),
-			'singular_name' => _x( 'Project Tag', 'taxonomy singular name', 'stechbd-projectpress' ),
-			'search_items' => __( 'Search Project Tags', 'stechbd-projectpress' ),
-			'all_items' => __( 'All Project Tags', 'stechbd-projectpress' ),
-			'parent_item' => __( 'Parent Project Tag', 'stechbd-projectpress' ),
-			'parent_item_colon' => __( 'Parent Project Tag:', 'stechbd-projectpress' ),
-			'edit_item' => __( 'Edit Project Tag', 'stechbd-projectpress' ),
-			'update_item' => __( 'Update Project Tag', 'stechbd-projectpress' ),
-			'add_new_item' => __( 'Add New Project Tag', 'stechbd-projectpress' ),
-			'new_item_name' => __( 'New Project Tag Name', 'stechbd-projectpress' ),
-			'menu_name' => __( 'Project Tags', 'stechbd-projectpress' ),
+			'name' => _x( 'Project Tags', 'taxonomy general name', 'projectpress' ),
+			'singular_name' => _x( 'Project Tag', 'taxonomy singular name', 'projectpress' ),
+			'search_items' => __( 'Search Project Tags', 'projectpress' ),
+			'all_items' => __( 'All Project Tags', 'projectpress' ),
+			'parent_item' => __( 'Parent Project Tag', 'projectpress' ),
+			'parent_item_colon' => __( 'Parent Project Tag:', 'projectpress' ),
+			'edit_item' => __( 'Edit Project Tag', 'projectpress' ),
+			'update_item' => __( 'Update Project Tag', 'projectpress' ),
+			'add_new_item' => __( 'Add New Project Tag', 'projectpress' ),
+			'new_item_name' => __( 'New Project Tag Name', 'projectpress' ),
+			'menu_name' => __( 'Project Tags', 'projectpress' ),
 		);
 
 		$args = array (
@@ -378,14 +374,14 @@ class Main
 				</div>';
 
 		echo '<div class="form-field form-required term-name-wrap">
-					<label for="project-image">Image URL</label> | <a href="#" class="stechbd-projectpress-upload">Upload image</a>
+					<label for="project-image">Image URL</label> | <a href="#" class="projectpress-upload">Upload image</a>
 					<input name="project_image" id="project-image" type="text" aria-required="true" aria-describedby="project-image-description" value="' . esc_attr( $image_value ) . '">
 					<p id="project-image-description">The url of an image for the project.</p>
 				</div>';
 
 		echo '<div class="form-field form-required term-name-wrap">
 					<label for="project-image-preview">Image Preview</label>
-					<div id="project-image-preview" class="stechbd-projectpress-image-preview">
+					<div id="project-image-preview" class="projectpress-image-preview">
 						<img src="' . ( esc_attr( $image_value ) ?? 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image' ) . '" width="50%" height="50%" style="object-fit: cover; object-position: center;" alt="Preview">
 					</div>
 				</div>';
@@ -404,7 +400,7 @@ class Main
 						 * @returns {void} Returns nothing.
 						 * @since 1.0.0
 						 */
-						$('.stechbd-projectpress-upload').click(function (e) {
+						$('.projectpress-upload').click(function (e) {
 							e.preventDefault();
 							
 							let image = wp.media({
@@ -483,9 +479,9 @@ class Main
 	{
 		return array (
 			'name' => 'ProjectPress',
-			'version' => ST_PROJECTPRESS_VERSION,
-			'version_code' => ST_PROJECTPRESS_VERSION_CODE,
-			'id' => 'stechbd-projectpress',
+			'version' => PROJECTPRESS_VERSION,
+			'version_code' => PROJECTPRESS_VERSION_CODE,
+			'id' => 'projectpress',
 		);
 	}
 

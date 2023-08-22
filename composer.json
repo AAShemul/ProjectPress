@@ -1,41 +1,25 @@
 {
-  "name": "stechbd/projectpress",
+  "name": "aashemul/projectpress",
   "version": "1.0.0",
-  "description": "A WordPress plugin to show cookie consent.",
+  "description": "ProjectPress is a lightweight and beautiful project showcase generator for WordPress.",
   "type": "wordpress-plugin",
   "license": "GPLv3",
   "keywords": [
 	"wordpress",
 	"wordpress-plugin",
 	"php",
-	"cookiecons",
-	"stechbd",
+	"projectpress",
 	"aashemul"
   ],
-  "homepage": "https://www.stechbd.net/project/CookieCons/",
-  "support": {
-	"issues": "https://github.com/STechBD/CookieCons/issues",
-	"source": "https://github.com/STechBD/CookieCons",
-	"email": "product@stechbd.net",
-	"chat": "https://www.facebook.com/STechBD.Net/",
-	"docs": "https://docs.stechbd.net/CookieCons/",
-	"tickets": "https://clients.stechbd.net"
-  },
   "config": {
 	"vendor-dir": "src/inc/vendor"
   },
   "autoload": {
 	"psr-4": {
-	  "STechBD\\ProjectPress\\": "src/inc/"
+	  "ProjectPress\\": "src/inc/"
 	}
   },
   "authors": [
-	{
-	  "name": "S Technologies",
-	  "email": "product@stechbd.net",
-	  "homepage": "https://www.stechbd.net",
-	  "role": "Developer"
-	},
 	{
 	  "name": "Md. Ashraful Alam Shemul",
 	  "email": "aashemul@gmail.com",
@@ -44,25 +28,5 @@
 	}
   ],
   "minimum-stability": "stable",
-  "require": {
-	"php": ">=7.4"
-  },
-  "extra": {
-	"wordpress-plugin": {
-	  "name": "CookieCons",
-	  "version": "1.0.0",
-	  "textdomain": "stechbd-cookiecons",
-	  "domain-path": "languages",
-	  "main-file": "stechbd-cookiecons.php",
-	  "requires": {
-		"wordpress": ">=5.0"
-	  },
-	  "tested": "6.2.2",
-	  "author": "S Technologies",
-	  "author-uri": "https://www.stechbd.net",
-	  "description": "CookieCons is a simple and lightweight cookie consent plugin for WordPress.",
-	  "license": "GPLv3",
-	  "license-uri": "https://www.gnu.org/licenses/gpl-3.0.html"
-	}
-  }
+  "require": {}
 }

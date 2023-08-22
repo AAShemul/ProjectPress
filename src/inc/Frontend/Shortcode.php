@@ -3,22 +3,18 @@
 
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 21, 2023
  */
 
 
-namespace STechBD\ProjectPress\Frontend;
+namespace ProjectPress\Frontend;
 
 use WP_Query;
 
@@ -28,7 +24,7 @@ use WP_Query;
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
+	die( '<title>Access Denied | ProjectPress</title><h1>ProjectPress</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -64,14 +60,14 @@ class Shortcode
 
 		$projects_query = new WP_Query( $args );
 
-		$content = '<div class="stechbd-projectpress-filter">';
+		$content = '<div class="projectpress-filter">';
 
 		$all_categories = get_terms( array (
 			'taxonomy' => 'project_category',
 			'hide_empty' => true,
 		) );
 
-		$content .= __( 'Filter by Categories: ', 'stechbd-projectpress' ) . '<a href="#" class="option active" onclick="event.preventDefault()" data-category="All">' . __( 'All', 'stechbd-projectpress' ) . '</a>';
+		$content .= __( 'Filter by Categories: ', 'projectpress' ) . '<a href="#" class="option active" onclick="event.preventDefault()" data-category="All">' . __( 'All', 'projectpress' ) . '</a>';
 
 		foreach ( $all_categories as $category ) {
 			$content .= '<a href="#" class="option" onclick="event.preventDefault()" data-category="' . $category->slug . '">' . $category->name . '</a>';
@@ -79,7 +75,7 @@ class Shortcode
 
 		$content .= '</div>';
 
-		$content .= '<div class="stechbd-projectpress-sort">
+		$content .= '<div class="projectpress-sort">
 				Sort by:
                 <a href="#" data-id="default" class="short active" onclick="event.preventDefault()">Default</a> |
                 <a href="#" data-id="name-asc" class="short" onclick="event.preventDefault()">Name (Asc)</a> |
@@ -89,7 +85,7 @@ class Shortcode
               </div>';
 
 		if ( $projects_query->have_posts() ) {
-			$content .= '<div class="stechbd-projectpress-grid">';
+			$content .= '<div class="projectpress-grid">';
 			while ( $projects_query->have_posts() ) {
 				$projects_query->the_post();
 				$id = get_the_ID();
@@ -124,7 +120,7 @@ class Shortcode
 
 			$content .= '</div>';
 		} else {
-			$content .= '<p>' . __( 'No project found.', 'stechbd-projectpress' ) . '</p>';
+			$content .= '<p>' . __( 'No project found.', 'projectpress' ) . '</p>';
 		}
 
 		wp_reset_postdata();

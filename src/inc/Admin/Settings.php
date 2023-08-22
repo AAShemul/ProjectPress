@@ -3,22 +3,18 @@
 
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 22, 2023
  */
 
 
-namespace STechBD\ProjectPress\Admin;
+namespace ProjectPress\Admin;
 
 /**
  * Exit if accessed directly.
@@ -26,7 +22,7 @@ namespace STechBD\ProjectPress\Admin;
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
+	die( '<title>Access Denied | ProjectPress</title><h1>ProjectPress</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -44,7 +40,7 @@ class Settings
 	 */
 	public function settings_page(): void
 	{
-		require_once ST_PROJECTPRESS_ADMIN . 'View/Settings.php';
+		require_once PROJECTPRESS_ADMIN . 'View/Settings.php';
 	}
 
 	/**
@@ -56,12 +52,12 @@ class Settings
 	public function form_handler(): void
 	{
 		if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['submitProjectPress'] ) ) {
-			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'stechbd-projectpress' ) ) {
-				wp_die( '<h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
+			if ( ! wp_verify_nonce( $_POST['_wpnonce'], 'projectpress' ) ) {
+				wp_die( '<h1>ProjectPress</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
 			}
 
 			if ( ! current_user_can( 'manage_options' ) ) {
-				wp_die( '<h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
+				wp_die( '<h1>ProjectPress</h1><p>Access is denied for security reasons.</p>', 'ProjectPress Error' );
 			}
 
 			$delete = get_option( 'stechbd_projectpress_delete_projects' );
@@ -69,13 +65,13 @@ class Settings
 
 			if ( ! empty( $deleteVal ) ) {
 				if ( $delete === $deleteVal ) {
-					add_settings_error( 'stechbd-projectpress', 'error', 'Same valur already exists!' );
+					add_settings_error( 'projectpress', 'error', 'Same valur already exists!' );
 				} else {
 					update_option( 'stechbd_projectpress_delete_projects', $deleteVal );
-					add_settings_error( 'stechbd-projectpress', 'success', 'Setting value updated successfully!', 'updated' );
+					add_settings_error( 'projectpress', 'success', 'Setting value updated successfully!', 'updated' );
 				}
 			} else {
-				add_settings_error( 'stechbd-projectpress', 'error', 'Please select an option!' );
+				add_settings_error( 'projectpress', 'error', 'Please select an option!' );
 			}
 		}
 	}

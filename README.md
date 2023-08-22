@@ -1,6 +1,6 @@
 # ProjectPress - Project Showcase for WordPress
 
-ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
 It uses WordPress custom post type to generate the showcase for your projects.
 
 ## Table of Contents
@@ -39,10 +39,9 @@ It uses WordPress custom post type to generate the showcase for your projects.
 * Lightweight and simple.
 * Beautiful and responsive.
 * Compatible with any WordPress theme.
-* Compatible with any WordPress version (tested up to 6.2.2).
+* Compatible with any WordPress version (tested up to 6.3).
 * Compatible with any browser (tested on Chrome, Firefox, Edge, Safari, and Opera).
 * Compatible with any device (desktop, laptop, tablet, and mobile).
-* Compatible with any operating system (Windows, macOS, iOS, Android, and Linux).
 
 ## Screenshots
 
@@ -107,27 +106,6 @@ None yet.
 * [Terms & Conditions](https://www.stechbd.net/terms)
 * [Refund Policy](https://www.stechbd.net/refund-policy)
 * [Software License Agreement](https://www.stechbd.net/software-license-agreement)
-
-## Frequently Asked Questions
-
-### What is a cookie?
-
-A cookie is a small piece of data that a website asks your browser to store on your computer or mobile device. The
-cookie allows the website to "remember" your actions or preferences over time.
-
-### What is the EU GDPR cookie law?
-
-The EU GDPR cookie law is a piece of privacy legislation that requires websites to get consent from visitors to store or
-retrieve any information on a computer, smartphone, or tablet.
-
-### What is CCPA?
-
-The California Consumer Privacy Act (CCPA) is a state statute intended to enhance privacy rights and consumer protection
-for residents of California, United States.
-
-### What is a cookie consent manager?
-
-A cookie consent manager is a tool that helps you comply with the EU GDPR cookie law and CCPA regulations.
 
 ## Copyright
 

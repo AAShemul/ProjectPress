@@ -1,15 +1,11 @@
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 21, 2023
  */
@@ -19,7 +15,7 @@
  * Grid
  */
 /********** Filter **********/
-.stechbd-projectpress-filter {
+.projectpress-filter {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -27,7 +23,7 @@
 	margin-bottom: 20px;
 }
 
-.stechbd-projectpress-filter .option {
+.projectpress-filter .option {
 	display: inline-block;
 	padding: 5px 10px;
 	background-color: #1a1a1a;
@@ -39,30 +35,30 @@
 	font-size: medium;
 }
 
-.stechbd-projectpress-filter .active {
+.projectpress-filter .active {
 	background-color: #fff;
 	color: #1a1a1a;
 }
 
 /********** Sort **********/
-.stechbd-projectpress-sort {
+.projectpress-sort {
 	text-align: center;
 	margin-top: 10px;
 }
 
-.stechbd-projectpress-sort .short {
+.projectpress-sort .short {
 	text-decoration: none;
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
-.stechbd-projectpress-sort .short.active {
+.projectpress-sort .short.active {
 	color: #1a1a1a;
 	font-weight: bold;
 }
 
 /********** Grid **********/
-.stechbd-projectpress-grid {
+.projectpress-grid {
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -72,12 +68,12 @@
 	margin-right: auto;
 }
 
-.stechbd-projectpress-grid a:link,
-.stechbd-projectpress-grid a:visited {
+.projectpress-grid a:link,
+.projectpress-grid a:visited {
 	text-decoration: none;
 }
 
-.stechbd-projectpress-grid a .item {
+.projectpress-grid a .item {
 	border: 1px solid #ddd;
 	padding: 20px;
 	text-align: center;
@@ -86,18 +82,18 @@
 	max-width: 350px;
 }
 
-.stechbd-projectpress-grid a .item:hover {
+.projectpress-grid a .item:hover {
 	transform: translateY(-5px);
 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-.stechbd-projectpress-grid a .item img {
+.projectpress-grid a .item img {
 	max-width: 100%;
 	height: auto;
 	border-radius: 5px;
 }
 
-.stechbd-projectpress-grid a .item .category {
+.projectpress-grid a .item .category {
 	display: inline-block;
 	padding: 5px;
 	background-color: #1a1a1a;
@@ -108,7 +104,7 @@
 }
 
 @media (max-width: 768px) {
-	.stechbd-projectpress-grid {
+	.projectpress-grid {
 		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
 	}
 }
@@ -116,7 +112,7 @@
 /**
  * Modal
  */
-.stechbd-projectpress-modal {
+.projectpress-modal {
 	display: none;
 	position: fixed;
 	z-index: 999;
@@ -130,7 +126,7 @@
 	overflow-y: auto;
 }
 
-.stechbd-projectpress-modal .content {
+.projectpress-modal .content {
 	position: relative;
 	background-color: #fff;
 	margin: 15% auto;
@@ -140,11 +136,11 @@
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-.stechbd-projectpress-modal .content .loading {
+.projectpress-modal .content .loading {
 	/*background: #0a4b78;*/
 }
 
-.stechbd-projectpress-modal .content .loading .spinner {
+.projectpress-modal .content .loading .spinner {
 	border: 4px solid rgba(255, 255, 255, 0.3);
 	border-top: 4px solid black;
 	border-radius: 50%;
@@ -164,7 +160,7 @@
 	}
 }
 
-.stechbd-projectpress-modal .content .close {
+.projectpress-modal .content .close {
 	position: absolute;
 	top: 5px;
 	right: 10px;
@@ -174,7 +170,7 @@
 	text-align: center;
 }
 
-.stechbd-projectpress-modal .content .details {
+.projectpress-modal .content .details {
 	display: grid;
 	grid-template-columns: 1fr 2fr;
 	grid-template-rows: auto auto;
@@ -186,25 +182,25 @@
 	justify-items: center;
 }
 
-.stechbd-projectpress-modal .content .details .thumbnail {
+.projectpress-modal .content .details .thumbnail {
 	grid-area: thumbnail;
 }
 
-.stechbd-projectpress-modal .content .details .head {
+.projectpress-modal .content .details .head {
 	grid-area: head;
 	text-align: center;
 }
 
-.stechbd-projectpress-modal .content .details .head h3 {
+.projectpress-modal .content .details .head h3 {
 	text-align: center;
 	margin-bottom: 0;
 }
 
-.stechbd-projectpress-modal .content .details .head p {
+.projectpress-modal .content .details .head p {
 	margin-top: 0;
 }
 
-.stechbd-projectpress-modal .content .details .head .button {
+.projectpress-modal .content .details .head .button {
 	display: inline-block;
 	padding: 10px 15px;
 	background-color: #1a1a1a;
@@ -213,6 +209,6 @@
 	text-decoration: none;
 }
 
-.stechbd-projectpress-modal .content .details .description {
+.projectpress-modal .content .details .description {
 	grid-area: description;
 }

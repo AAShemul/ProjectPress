@@ -3,22 +3,18 @@
 
 /**
  * Project: ProjectPress
- * Description: ProjectPress is a simple and lightweight project showcase generator for WordPress.
+ * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
- * Website: https://www.stechbd.net/project/ProjectPress/
- * Developer: S Technologies
- * Homepage: https://www.stechbd.net
- * Contact: product@stechbd.net
  * Created: August 17, 2023
  * Updated: August 17, 2023
  */
 
 
-namespace STechBD\ProjectPress\Admin;
+namespace ProjectPress\Admin;
 
 /**
  * Exit if accessed directly.
@@ -26,7 +22,7 @@ namespace STechBD\ProjectPress\Admin;
  * @since 1.0.0
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	die( '<title>Access Denied | ProjectPress by STechBD.Net</title><h1>ProjectPress by STechBD.Net</h1><p>Access is denied for security reasons.</p>' );
+	die( '<title>Access Denied | ProjectPress</title><h1>ProjectPress</h1><p>Access is denied for security reasons.</p>' );
 }
 
 /**
@@ -68,7 +64,7 @@ class Menu
 	 */
 	public function add_admin_menu(): void
 	{
-		add_menu_page( __( 'ProjectPress Settings', 'stechbd-projectpress' ), __( 'ProjectPress', 'stechbd-projectpress' ), 'manage_options', 'stechbd-projectpress', [$this, 'admin_index'], 'dashicons-admin-generic' );
+		add_menu_page( __( 'ProjectPress Settings', 'projectpress' ), __( 'ProjectPress', 'projectpress' ), 'manage_options', 'projectpress', [$this, 'admin_index'], 'dashicons-admin-generic' );
 	}
 
 	/**
