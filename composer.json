@@ -1,5 +1,5 @@
 {
-  "name": "aashemul/projectpress",
+  "name": "stechbd/projectpress",
   "version": "1.0.0",
   "description": "ProjectPress is a lightweight and beautiful project showcase generator for WordPress.",
   "type": "wordpress-plugin",
@@ -22,8 +22,8 @@
   "authors": [
 	{
 	  "name": "Md. Ashraful Alam Shemul",
-	  "email": "aashemul@gmail.com",
-	  "homepage": "https://www.aashemul.com",
+	  "email": "ceo@stechbd.net",
+	  "homepage": "https://www.stechbd.net",
 	  "role": "Author"
 	}
   ],

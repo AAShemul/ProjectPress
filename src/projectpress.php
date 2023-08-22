@@ -3,13 +3,13 @@
 
 /**
  * Plugin Name: ProjectPress
- * Plugin URI: https://github.com/AAShemul/ProjectPress/
+ * Plugin URI: https://www.stechbd.net/ProjectPress/
  * Description: ProjectPress is a lightweight and beautiful project showcase generator for WordPress.
  * Version: 1.0.0
  * Version Code: 1
  * Since: 1.0.0
  * Author: Md. Ashraful Alam Shemul
- * Author URI: https://github.com/AAShemul
+ * Author URI: https://www.stechbd.net
  * Requires at least: 5.0.0
  * Tested up to: 6.2.2
  * Requires PHP: 8.0

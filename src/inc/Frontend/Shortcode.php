@@ -77,7 +77,6 @@ class Shortcode
 
 		$content .= '<div class="projectpress-sort">
 				Sort by:
-                <a href="#" data-id="default" class="short active" onclick="event.preventDefault()">Default</a> |
                 <a href="#" data-id="name-asc" class="short" onclick="event.preventDefault()">Name (Asc)</a> |
                 <a href="#" data-id="name-dsc" class="short" onclick="event.preventDefault()">Name (Desc)</a> |
                 <a href="#" data-id="category-asc" class="short" onclick="event.preventDefault()">Category (Asc)</a> |

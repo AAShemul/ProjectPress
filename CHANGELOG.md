@@ -10,7 +10,7 @@ All notable changes to this project will be documented in this file.
 
 Version 1.0.0 is the initial release of ProjectPress.
 
-- Release Date: July 7, 2023
+- Release Date: September 1, 2023
 - Version Code: 1
 - Release type: Major
 - Stability: Stable
@@ -20,6 +20,7 @@ Version 1.0.0 is the initial release of ProjectPress.
 - PHP Version: 7.4 or higher
 - PHP Extensions: PDO, JSON
 - MySQL Version: 8.0 or higher
+- WordPress Version: 5.0 or higher
 
 ### Changes
 

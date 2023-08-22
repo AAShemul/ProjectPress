@@ -69,9 +69,7 @@
 			$('.projectpress-sort .short').removeClass('active');
 			$(this).addClass('active');
 
-			if (sortId === 'default') {
-				$('.projectpress-grid').html(projects);
-			} else if (sortId === 'name-asc') {
+			if (sortId === 'name-asc') {
 				projects.sort(function (a, b) {
 					const titleA = $(a).find('h3 strong').text().toUpperCase();
 					const titleB = $(b).find('h3 strong').text().toUpperCase();

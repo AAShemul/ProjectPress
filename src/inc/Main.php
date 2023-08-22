@@ -346,12 +346,12 @@ class Main
 	public function add_custom_fields_metabox(): void
 	{
 		add_meta_box(
-			'project-custom-fields',       // Unique ID for the meta box
-			'Project Custom Fields',       // Title of the meta box
-			[$this, 'render_custom_fields_metabox'], // Callback function to render the metabox content
-			'project',                     // Post type to add the metabox to
-			'normal',                      // Context (normal, advanced, side)
-			'high'                         // Priority (high, core, default, low)
+			'project-custom-fields',
+			'Project Custom Fields',
+			[$this, 'render_custom_fields_metabox'],
+			'project',
+			'normal',
+			'high'
 		);
 	}
 
@@ -374,8 +374,9 @@ class Main
 				</div>';
 
 		echo '<div class="form-field form-required term-name-wrap">
-					<label for="project-image">Image URL</label> | <a href="#" class="projectpress-upload">Upload image</a>
-					<input name="project_image" id="project-image" type="text" aria-required="true" aria-describedby="project-image-description" value="' . esc_attr( $image_value ) . '">
+					<label for="project-image">Image URL</label>
+					<input name="project_image" id="project-image" class="newtag form-input-tip ui-autocomplete-input" type="text" aria-required="true" aria-describedby="project-image-description" value="' . esc_attr( $image_value ) . '">
+					<a href="#" class="button projectpress-upload" style="margin-top: 5px">Upload Image</a>
 					<p id="project-image-description">The url of an image for the project.</p>
 				</div>';
 
@@ -387,44 +388,67 @@ class Main
 				</div>';
 
 		echo "<script>
-					jQuery(document).ready(function($) {
-						let imageSource = $('#project-image img').attr('src');
-						if ( imageSource === '' || imageSource === undefined ) {
-							$('#project-image-preview img').attr('src', 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No-image');
-						}
-						
+					/**
+					 * Use $ code inside this to avoid '\$ is not defined' error.
+					 *
+					 * @param {function} $
+					 * @returns {void} Returns nothing.
+					 * @since 1.0.0
+					 */
+					;(function ($) {
+						'use strict';
+					
 						/**
-						 * Open media uploader on button clicks to select an image.
-						 *
-						 * @param {function} e The event object.
-						 * @returns {void} Returns nothing.
-						 * @since 1.0.0
-						 */
-						$('.projectpress-upload').click(function (e) {
-							e.preventDefault();
-							
-							let image = wp.media({
-								title: 'Upload Image',
-								multiple: false
-							}).open()
-								.on('select', function (e) {
-									let uploaded_image = image.state().get('selection').first();
-									let image_url = uploaded_image.toJSON().url;
-									$('#project-image').val(image_url);
-								});
-						});
-						
-						/**
-						 * Update the link of image preview when user changes the input value.
-						 *
-						 * @returns {void} Returns nothing.
-						 * @since 1.0.0
-						 */
-						$('#project-image').change(function () {
-							let image_url = $(this).val();
-							$('#project-image-preview img').attr('src', image_url);
-						});
-					});
+					     * Update the link of image preview.
+					     * 
+					     * @returns {void} Returns nothing.
+					     * @since 1.0.0
+					     */
+						function updateImagePreview() {
+					        const imageValue = $('#project-image').val();
+					        const imagePreview = $('#project-image-preview img');
+					        
+					        if (imageValue === '' || imageValue === undefined) {
+					            imagePreview.attr('src', 'https://snapbuilder.com/code_snippet_generator/image_placeholder_generator/1000x600/007730/DDDDDD/No Image. Please upload or select an image from above.');
+					        } else {
+					            imagePreview.attr('src', imageValue);
+					        }
+					    }
+
+					    updateImagePreview();
+
+					    /**
+					     * Open media uploader on button clicks to select an image.
+					     * 
+					     * @param {function} e The event object.
+					     * @returns {void} Returns nothing.
+					     * @since 1.0.0
+					     */
+					    $('.projectpress-upload').click(function (e) {
+					        e.preventDefault();
+
+					        let image = wp.media({
+					            title: 'Upload Image',
+					            multiple: false
+					        }).open()
+					        .on('select', function (e) {
+					            let uploaded_image = image.state().get('selection').first();
+					            let image_url = uploaded_image.toJSON().url;
+					            $('#project-image').val(image_url);
+
+					            updateImagePreview();
+					        });
+					    });
+					
+					    /**
+					     * Update the link of image preview when user changes the input value.
+					     * 
+					     * @since 1.0.0
+					     */
+					    $('#project-image').on('change keyup', function () {
+					        updateImagePreview();
+					    });
+					})(jQuery);
 				</script>";
 	}
 
