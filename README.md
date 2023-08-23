@@ -36,12 +36,34 @@ It uses WordPress custom post type to generate the showcase for your projects.
 
 ## Features
 
-* Lightweight and simple.
-* Beautiful and responsive.
+### Basic Features
+
+* Lightweight, simple, beautiful, and responsive.
 * Compatible with any WordPress theme.
 * Compatible with any WordPress version (tested up to 6.3).
-* Compatible with any browser (tested on Chrome, Firefox, Edge, Safari, and Opera).
-* Compatible with any device (desktop, laptop, tablet, and mobile).
+
+### Complete Features
+
+1. Completely OOP-based and Composer are used for dependency management and autoload (PSR-4).
+2. Custom Post Type (CPT) is developed for project management.
+3. It is a standalone plugin that can easily be installed with every theme
+   without modifying them.
+4. Adding a project with thumbnail, category, tag, external link, image, order (to serialize),
+   and many more.
+5. Image can be set by direct URL or using WordPress default image uploader.
+6. Automatically shows image preview as soon as the image URL value changes or the creator uploads or select any
+   image.
+7. Generates REST API for the projects.
+8. Settings page to choose whether all projects will be deleted or not while plugin deactivation.
+9. Automatically creates a project showcase page on the installation of the plugin.
+10. Automatically removes that project page on the deactivation of the plugin.
+11. A simple shortcode `[ProjectPress]` loads the whole showcase content.
+12. Beautiful grid layout for the showcase with hover effect.
+13. Responsive layout for all devices.
+14. Projects can be filtered by categories.
+15. Projects can be sorted by names or categories in both ascending and descending order.
+16. Opens project details in a modal box on click using AJAX.
+17. Responsive layout to show the details of the project in a modal.
 
 ## Screenshots
 
@@ -56,7 +78,7 @@ To be added later.
 
 ## Future Plans
 
-Will be added soon.
+To be added soon.
 
 ## License
 
