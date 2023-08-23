@@ -7,12 +7,14 @@
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
  * Created: August 17, 2023
- * Updated: August 21, 2023
+ * Updated: August 23, 2023
  */
 
 
 /**
- * Grid
+ * Grid view of projects.
+ *
+ * @since 1.0.0
  */
 /********** Filter **********/
 .projectpress-filter {
@@ -31,7 +33,7 @@
 	border: 1px solid #1a1a1a;
 	border-radius: 5px;
 	text-decoration: none;
-	margin: 0 10px;
+	margin: 5px 10px;
 	font-size: medium;
 }
 
@@ -110,7 +112,9 @@
 }
 
 /**
- * Modal
+ * Modal box of single project.
+ *
+ * @since 1.0.0
  */
 .projectpress-modal {
 	display: none;
@@ -130,14 +134,10 @@
 	position: relative;
 	background-color: #fff;
 	margin: 15% auto;
-	padding: 20px;
+	padding: 40px 20px;
 	width: 70%;
 	border-radius: 5px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-.projectpress-modal .content .loading {
-	/*background: #0a4b78;*/
 }
 
 .projectpress-modal .content .loading .spinner {
@@ -179,6 +179,7 @@
 	grid-template-areas:
     "thumbnail head"
     "description description";
+	align-items: center;
 	justify-items: center;
 }
 
@@ -193,6 +194,7 @@
 
 .projectpress-modal .content .details .head h3 {
 	text-align: center;
+	margin-top: 0;
 	margin-bottom: 0;
 }
 
@@ -211,4 +213,18 @@
 
 .projectpress-modal .content .details .description {
 	grid-area: description;
+}
+
+@media (max-width: 768px) {
+	.projectpress-modal .content {
+		width: 80%;
+	}
+
+	.projectpress-modal .content .details {
+		grid-template-columns: 1fr;
+		grid-template-areas:
+        "thumbnail"
+        "head"
+        "description";
+	}
 }

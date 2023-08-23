@@ -7,7 +7,7 @@
  * Author: Md. Ashraful Alam Shemul
  * Email: ceo@stechbd.net
  * Created: August 17, 2023
- * Updated: August 21, 2023
+ * Updated: August 23, 2023
  */
 
 
@@ -62,6 +62,8 @@
 		 * @returns {void} Returns nothing.
 		 * @since 1.0.0
 		 */
+		const initialProjectsOrder = $('.projectpress-grid a').clone();
+
 		$('.projectpress-sort .short').click(function () {
 			const sortId = $(this).data('id');
 			const projects = $('.projectpress-grid a');
@@ -69,7 +71,9 @@
 			$('.projectpress-sort .short').removeClass('active');
 			$(this).addClass('active');
 
-			if (sortId === 'name-asc') {
+			if (sortId === 'default') {
+				$('.projectpress-grid').html(initialProjectsOrder);
+			} else if (sortId === 'name-asc') {
 				projects.sort(function (a, b) {
 					const titleA = $(a).find('h3 strong').text().toUpperCase();
 					const titleB = $(b).find('h3 strong').text().toUpperCase();
@@ -182,7 +186,7 @@
 				'</div>' +
 				'<div class="description">' +
 				'<h3><strong>Description</strong></h3>' +
-				'<p>Tag(s): ' + tag + '</p>' +
+				'<p><strong>Tag(s):</strong> ' + tag + '</p>' +
 				'<p>' + description + '</p>' +
 				'<h3><strong>Preview Image</strong></h3>' +
 				'<div><img src="' + image + '" alt="' + title + '" width="100%"></div>' +
